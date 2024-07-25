@@ -1,0 +1,10 @@
+*.o
+*.swp
+*.vscode
+objs/
+*.out
+libft.a
+pseudo.txt
+MLX42/
+so_long
+*.ber
