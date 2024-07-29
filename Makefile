@@ -6,7 +6,7 @@
 #    By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 12:05:04 by prynty            #+#    #+#              #
-#    Updated: 2024/07/23 18:14:46 by prynty           ###   ########.fr        #
+#    Updated: 2024/07/29 13:41:39 by prynty           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ FILES 		= main.c \
 			check_args.c \
 			error_handling.c \
 			init_map.c \
+			check_map.c \
 
 SRCS		= $(addprefix srcs/, $(FILES))
 OBJS		= $(addprefix objs/, $(FILES:.c=.o))

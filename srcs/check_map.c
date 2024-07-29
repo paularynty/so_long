@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_game.c                                        :+:      :+:    :+:   */
+/*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/20 15:43:04 by prynty            #+#    #+#             */
-/*   Updated: 2024/07/23 17:09:41 by prynty           ###   ########.fr       */
+/*   Created: 2024/07/25 12:15:27 by prynty            #+#    #+#             */
+/*   Updated: 2024/07/25 12:18:30 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void    init_game(t_game *game)
+void    check_empty_line(char *map)
 {
-    game->mlx_ptr = mlx_init(300, 300, "SO_LONG", true);
-    if (game->mlx_ptr == NULL)
+    size_t  i;
+    
+    i = 0;
+    while (map[i])
     {
-        free(game->mlx_ptr);
-        print_error("Could not find mlx pointer", game);
-    }
-    game->window_ptr = mlx_new_window(); //have to find existing func for this
-    if (game->window_ptr == NULL)
-    {
-        free(game->mlx_ptr);
-        print_error("Could not create window", game);
+        if (map[0] == '\n' || (map[i] == '\n' && (map[i + 1]) == '\n'))
+            print_error("Map contains empty lines");
+        i++;
     }
 }
