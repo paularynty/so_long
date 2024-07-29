@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/07/29 15:25:21 by prynty           ###   ########.fr       */
+/*   Updated: 2024/07/29 17:30:27 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,15 @@ typedef struct s_elements
 
 
 void    check_args(int argc, char **argv);
-int     print_error(char *message);
-void    read_map(t_game *game, char *map);
-void	init_game(char *map);
-void    check_empty_line(char *map);
+void    print_error(char *message);
+char    *read_map(char *map);
+t_game	*init_map(char *map);
+
+//parse_map.c
+void    check_empty_lines(char *map);
+void    check_map_shape(char **grid);
+size_t  count_rows(char **grid);
+size_t	count_collectables(t_game *game);
+
 
 #endif
