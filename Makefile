@@ -6,7 +6,7 @@
 #    By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 12:05:04 by prynty            #+#    #+#              #
-#    Updated: 2024/07/29 13:41:39 by prynty           ###   ########.fr        #
+#    Updated: 2024/07/30 17:02:04 by prynty           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,6 @@ MAGENTA 	= \033[1;95m
 PINK		= \e[1m\e[38;5;212m
 WHITE 		= \033[1;97m
 
-COMP_START	= echo "\n🚧 $(ORANGE)Starting the compilation...$(RESET)"
 OBJ_READY	= echo "📥 $(ORANGE)Compiled so_long files!$(RESET)"
 COMP_LIBFT	= echo "\n📝 $(YELLOW)Compiling Libft...$(RESET)$(DARK_GRAY)"
 SL_READY	= echo "\n🧮 $(GREEN)So_long ready!$(RESET)"
@@ -51,11 +50,12 @@ FILES 		= main.c \
 			error_handling.c \
 			init_map.c \
 			check_map.c \
+			validate_path.c \
 
 SRCS		= $(addprefix srcs/, $(FILES))
 OBJS		= $(addprefix objs/, $(FILES:.c=.o))
 
-all: folders $(NAME)
+all: $(NAME)
 
 objs:
 	@mkdir -p objs/
@@ -72,14 +72,6 @@ $(NAME): $(OBJS)
 	@cc -g $(FLAGS) $(SRCS) libft.a -o $(NAME)
 	@chmod 777 $(NAME)
 	@$(SL_READY)
-
-comp_start:
-	@$(COMP_START)
-
-folders:
-	@$(COMP_FOLDERS)
-	@mkdir -p objs/
-	@mkdir -p libft/objs/
 
 comp_libft:
 	$(COMP_LIBFT)

@@ -6,7 +6,7 @@
 #    By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/17 18:26:18 by prynty            #+#    #+#              #
-#    Updated: 2024/07/23 16:54:19 by prynty           ###   ########.fr        #
+#    Updated: 2024/07/30 14:16:38 by prynty           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,8 +90,6 @@ SRCS		= ft_atoi.c \
 		  ft_substr.c \
 		  ft_toupper.c \
 		  ft_tolower.c \
-		  get_next_line_bonus.c \
-		  get_next_line_utils_bonus.c \
 		  get_next_line_utils.c \
 		  get_next_line.c \
 

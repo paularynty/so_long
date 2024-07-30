@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:09:11 by prynty            #+#    #+#             */
-/*   Updated: 2024/07/29 17:20:37 by prynty           ###   ########.fr       */
+/*   Updated: 2024/07/30 15:07:04 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 
 	///ft_memset(&game, 0, sizeof(t_game));
 	check_args(argc, argv);
-	init_map(argv[1]);
+	game = init_map(argv[1]);
 		//check_map_elements("01CPE");
 		//count_tile_size;
 		//load_images;
@@ -26,6 +26,6 @@ int	main(int argc, char **argv)
 		//init_game(game);
 		//mlx_key_hook;
 		//mlx_loop;
-		//clean_game;
+	free_game(game);
 	return (0);
 }

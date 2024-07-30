@@ -6,65 +6,100 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/07/29 17:43:22 by prynty           ###   ########.fr       */
+/*   Updated: 2024/07/30 17:01:15 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
+size_t  count_rows(char **grid)
+{
+    size_t  y;
+
+    y = 0;
+    while (grid[y])
+        y++;
+    return (y);
+}
+
+size_t	count_collectables(t_game *game)
+{
+	size_t	y;
+	size_t	x;
+	size_t	collectables;
+
+	y = 0;
+	collectables = 0;
+	while (y < game->map_height)
+	{
+		x = 0;
+		while (x < game->map_width)
+		{
+			if (game->map[y][x] == 'C')
+			{
+				collectables++;
+			}
+			x++;
+		}
+		y++;
+	}
+	return (collectables);
+}
+
 char    *read_map(char *map)
 {
-    t_game  *game;
     char    *line;
-    char    *line_joined;
-    int     fd;
+    char    *temp;
+    char    *joined_line;
+    int     map_fd;
 
-    fd = open(map, O_RDONLY);
-    if (fd < 0)
+    map_fd = open(map, O_RDONLY);
+    if (map_fd < 0)
             print_error("Failed to open map, use format: ./so_long [map].ber");
-    line_joined = ft_calloc(1, 1);
-    if (!line_joined)
+    joined_line = ft_calloc(1, 1);
+    if (!joined_line)
         return (NULL);
     while (1)
     {
-        line = get_next_line(fd);
-        if (line)
+        line = get_next_line(map_fd);
+        if (!line)
         {
-            line_joined = ft_strjoin(line_joined, line);
-            free(line);
-        }
-        else
-            print_error("Empty map");
+            if (ft_strlen(joined_line) == 0)
+                print_error("Empty map");
             break ;
+        }
+        temp = joined_line;
+        joined_line = ft_strjoin(joined_line, line);
+        free(temp);
+        free(line);
+        if (!joined_line)
+            return (NULL);
     }
-    close (fd);
-    return (line_joined);
+    close(map_fd);
+    return (joined_line);
 }
 
-void    check_map_content(char *map)
+t_game  *init_game_struct(char **grid)
 {
-    int player;
-    int exit;
-    int collectables;
-    int i;
+    t_game  *game;
 
-    player = 0;
-	exit = 0;
-	collectables = 0;
-	i = 0;
-	while (map[i++])
-	{
-		if (map[i] == 'P')
-			player++;
-        if (map[i] == 'C')
-			collectables++;
-		if (map[i] == 'E')
-			exit++;
-		if (!(ft_strchr("PCE01\n", map[i])))
-        		print_error("Map contains invalid characters");
-	}
-	if (player != 1 || exit != 1 || collectables < 1)
-		print_error("Invalid player/exit/collectable values (one/one/at least one)");
+    game = (t_game *)ft_calloc(1, sizeof(t_game));
+    if (!game)
+    {
+        free_game(game);
+        print_error("Memory allocation failed");
+    }
+    game->map = grid;
+    game->map_width = ft_strlen(grid[0]);
+    game->map_height = count_rows(grid);
+    game->collectables = count_collectables(game);
+    game->player_x = player_position(game, 'x');
+    game->player_y = player_position(game, 'y');
+    game->exit_x = exit_position(game, 'x');
+    game->exit_y = exit_position(game, 'y');
+    game->steps = 0;
+    game->won = 0;
+    return (game);
 }
 
 t_game	*init_map(char *map)
@@ -72,29 +107,15 @@ t_game	*init_map(char *map)
 	char	*map_as_str;
 	char	**map_as_array;
 	t_game	*game;
-    
+
     map_as_str = read_map(map);
 	check_empty_lines(map_as_str);
 	check_map_content(map_as_str);
 	map_as_array = ft_split(map_as_str, '\n');
 	check_map_shape(map_as_array);
-	// data = initialize_game_struct(map_as_array);
-	// check_walls(data);
-	// flood_fill(data);
-	free (map_as_str);
+	game = init_game_struct(map_as_array);
+	check_walls(game);
+	validate_path(game);
+	free(map_as_str);
 	return (game);
-}
-
-t_game  *init_game(char **grid)
-{
-    t_game  *game;
-
-    game = (t_game *)malloc(sizeof(t_game));
-    if (!game)
-        print_error("Memory allocation failed");
-    game->map_width = ft_strlen(grid[0]);
-    game->map_height = count_rows(grid);
-    game->map = grid;
-    game->steps = 0;
-    return (game);
 }
