@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/07/31 11:15:56 by prynty           ###   ########.fr       */
+/*   Updated: 2024/07/31 14:00:55 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,27 +55,27 @@ char    *read_map(char *map)
 
     map_fd = open(map, O_RDONLY);
     if (map_fd < 0)
-            exit_error("Failed to open map, use format: ./so_long [map].ber");
-    joined_line = ft_calloc(1, 1);
+            print_error("Failed to open map, use format: ./so_long [map].ber");
+    joined_line = ft_calloc(1, sizeof(char *));
     if (!joined_line)
         return (NULL);
-    while (1)
+    line = get_next_line(map_fd);
+    while (line != NULL)
     {
-        line = get_next_line(map_fd);
-        if (!line)
-        {
-            if (ft_strlen(joined_line) == 0)
-                exit_error("Empty map");
-            break ;
-        }
         temp = joined_line;
         joined_line = ft_strjoin(joined_line, line);
         free(temp);
         free(line);
         if (!joined_line)
-            return (NULL);
+            print_error("Memory allocation failed");
+        line = get_next_line(map_fd);
     }
     close(map_fd);
+    if (ft_strlen(joined_line) == 0)
+    {
+        free(joined_line);
+        print_error("Empty map");
+    }
     return (joined_line);
 }
 
@@ -87,10 +87,11 @@ t_game  *init_game_struct(char **grid)
     if (!game)
     {
         free_game(game);
-        exit_error("Memory allocation failed");
+        print_error("Memory allocation failed");
     }
     game->map = grid;
     game->map_width = ft_strlen(grid[0]);
+    ft_printf("Map width is %d characters\n", game->map_width);
     game->map_height = count_rows(grid);
     game->collectables = count_collectables(game);
     // game->player_x = player_position(game, 'x');
@@ -108,15 +109,20 @@ t_game	*init_map(char *map)
 	char	**map_as_array;
 	t_game	*game;
 
+    game = NULL;
     map_as_str = read_map(map);
-	check_empty_lines(map_as_str);
+	if (check_empty_lines(map_as_str))
+    {
+        free(map_as_str);
+        return (game);
+    }
 	check_map_content(map_as_str);
 	map_as_array = ft_split(map_as_str, '\n');
 	check_map_shape(map_as_array);
 	game = init_game_struct(map_as_array);
+    ft_printf("Map rows: %d\n", game->map_height);
 	check_walls(game);
 	// validate_path(game);
-    //test;
 	free(map_as_str);
 	return (game);
 }

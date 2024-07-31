@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/07/31 10:33:43 by prynty           ###   ########.fr       */
+/*   Updated: 2024/07/31 13:30:22 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct	s_game
 void    check_args(int argc, char **argv);
 
 //check_map.c
-void    check_empty_lines(char *map);
+int    check_empty_lines(char *map);
 void    check_map_shape(char **grid);
 void    check_map_content(char *map);
 void	check_walls(t_game *game);
@@ -73,6 +73,6 @@ void    validate_path(t_game *game);
 //error_handling.c
 void    free_game(t_game *game);
 void    free_map(char **map, size_t height);
-void    exit_error(char *message);
+void    print_error(char *message);
 
 #endif
