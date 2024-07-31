@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/07/30 16:57:35 by prynty           ###   ########.fr       */
+/*   Updated: 2024/07/31 10:33:43 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,6 @@ void    validate_path(t_game *game);
 //error_handling.c
 void    free_game(t_game *game);
 void    free_map(char **map, size_t height);
-void    print_error(char *message);
+void    exit_error(char *message);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:23:39 by prynty            #+#    #+#             */
-/*   Updated: 2024/07/30 16:39:56 by prynty           ###   ########.fr       */
+/*   Updated: 2024/07/31 10:50:02 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void check_empty_lines(char *map)
 
 	i = 0;
     if (!map[i])
-		print_error("Empty map");
+		exit_error("Empty map");
 	while (map[i])
 	{
 		if (map[0] == '\n' || (map[i] == '\n' && (map[i + 1]) == '\n'))
-			print_error("Map contains empty lines");
+			exit_error("Map contains empty lines");
 		i++;
 	}
 }
@@ -37,7 +37,7 @@ void check_map_shape(char **grid)
 	while (grid[i])
 	{
 		if (ft_strlen(grid[i]) != len)
-			print_error("Map is not rectangular");
+			exit_error("Map is not rectangular");
 		i++;
 	}
 }
@@ -55,18 +55,22 @@ void    check_map_content(char *map)
 	exit = 0;
 	while (map[i] != '\0')
 	{
+        if (!(ft_strchr("PCE01\n", map[i])))
+            exit_error("Map contains invalid characters");
+        if (map[i] == 'P' && player != 0)
+            exit_error("Verify that map contains only one player");
+        if (map[i] == 'E' && exit != 0)
+            exit_error("Verify that map contains only one exit");
         if (map[i] == 'P')
             player++;
-        else if (map[i] == 'C')
+        if (map[i] == 'C')
             collectables++;
-        else if (map[i] == 'E')
+        if (map[i] == 'E')
             exit++;
-        else if (!(ft_strchr("PCE01\n", map[i])))
-            print_error("Map contains invalid characters");
         i++;
     }
-	if (player != 1 || exit != 1 || collectables < 1) 
-		print_error("Invalid player, exit, or collectable values (1, 1, and at least 1)");
+	if (collectables < 1) 
+		exit_error("Verify that map contains at least one collectable");
 }
 
 void	check_walls(t_game *game)
@@ -77,23 +81,23 @@ void	check_walls(t_game *game)
     while (i < game->map_width)
     {
         if (game->map[0][i] != '1')
-            print_error("The map is not surrounded by walls (top row)");
+            exit_error("The map is not surrounded by walls (top row)");
         i++;
     }
     i = 0;
     while (i < game->map_width)
     {
         if (game->map[game->map_height - 1][i] != '1')
-            print_error("The map is not surrounded by walls (bottom row)");
+            exit_error("The map is not surrounded by walls (bottom row)");
         i++;
     }
     i = 0;
     while (i < game->map_height)
     {
         if (game->map[i][0] != '1')
-            print_error("The map is not surrounded by walls (left column)");
+            exit_error("The map is not surrounded by walls (left column)");
         if (game->map[i][game->map_width - 1] != '1')
-            print_error("The map is not surrounded by walls (right column)");
+            exit_error("The map is not surrounded by walls (right column)");
         i++;
     }
 }

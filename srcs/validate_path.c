@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:33:01 by prynty            #+#    #+#             */
-/*   Updated: 2024/07/30 17:10:54 by prynty           ###   ########.fr       */
+/*   Updated: 2024/07/31 10:33:59 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void    validate_path(t_game *game)
     temp.exit_x = 0;
     temp.map = (char **)malloc(temp.map_height * sizeof(char *));
     if (!temp.map)
-        print_error("Memory allocation failed");
+        exit_error("Memory allocation failed");
     i = 0;
     while (i < temp.map_height)
     {
@@ -107,6 +107,6 @@ void    validate_path(t_game *game)
     }
     check_path(&temp, temp.player_x, temp.player_y);
     if (!(temp.exit_x == 1 && temp.collectables == 0))
-        print_error("No valid path available");
+        exit_error("No valid path available");
     free_map(temp.map, temp.map_height);    
 }

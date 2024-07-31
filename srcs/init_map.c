@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/07/30 17:01:15 by prynty           ###   ########.fr       */
+/*   Updated: 2024/07/31 10:34:17 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char    *read_map(char *map)
 
     map_fd = open(map, O_RDONLY);
     if (map_fd < 0)
-            print_error("Failed to open map, use format: ./so_long [map].ber");
+            exit_error("Failed to open map, use format: ./so_long [map].ber");
     joined_line = ft_calloc(1, 1);
     if (!joined_line)
         return (NULL);
@@ -65,7 +65,7 @@ char    *read_map(char *map)
         if (!line)
         {
             if (ft_strlen(joined_line) == 0)
-                print_error("Empty map");
+                exit_error("Empty map");
             break ;
         }
         temp = joined_line;
@@ -87,16 +87,16 @@ t_game  *init_game_struct(char **grid)
     if (!game)
     {
         free_game(game);
-        print_error("Memory allocation failed");
+        exit_error("Memory allocation failed");
     }
     game->map = grid;
     game->map_width = ft_strlen(grid[0]);
     game->map_height = count_rows(grid);
     game->collectables = count_collectables(game);
-    game->player_x = player_position(game, 'x');
-    game->player_y = player_position(game, 'y');
-    game->exit_x = exit_position(game, 'x');
-    game->exit_y = exit_position(game, 'y');
+    // game->player_x = player_position(game, 'x');
+    // game->player_y = player_position(game, 'y');
+    // game->exit_x = exit_position(game, 'x');
+    // game->exit_y = exit_position(game, 'y');
     game->steps = 0;
     game->won = 0;
     return (game);
@@ -115,7 +115,7 @@ t_game	*init_map(char *map)
 	check_map_shape(map_as_array);
 	game = init_game_struct(map_as_array);
 	check_walls(game);
-	validate_path(game);
+	// validate_path(game);
 	free(map_as_str);
 	return (game);
 }
