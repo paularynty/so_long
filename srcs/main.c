@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:09:11 by prynty            #+#    #+#             */
-/*   Updated: 2024/07/31 13:45:54 by prynty           ###   ########.fr       */
+/*   Updated: 2024/07/31 15:37:57 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int argc, char **argv)
 	game = init_map(argv[1]);
 	if(!game)
 		return (1);
+		//check elements PCE01;
 		//count_tile_size;
 		//load_images;
 		//parse_map;

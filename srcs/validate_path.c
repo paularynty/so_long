@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:33:01 by prynty            #+#    #+#             */
-/*   Updated: 2024/07/31 11:37:54 by prynty           ###   ########.fr       */
+/*   Updated: 2024/07/31 15:47:09 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ size_t  player_position(t_game *game, char c)
         x = 0;
         while (x < game->map_width)
         {
-            if (game->map[x][y] == 'P')
+            if (game->map[y][x] == 'P')
             {
                 if (c == 'x')
                     return (x);
@@ -48,7 +48,7 @@ size_t  exit_position(t_game *game, char c)
         x = 0;
         while (x < game->map_width)
         {
-            if (game->map[x][y] == 'E')
+            if (game->map[y][x] == 'E')
             {
                 if (c == 'x')
                     return (x);
@@ -85,7 +85,7 @@ int check_path(t_game *temp, size_t x, size_t y)
     return (0);
 }
 
-void    validate_path(t_game *game)
+void    flood_fill(t_game *game)
 {
     t_game  temp;
     size_t  i;

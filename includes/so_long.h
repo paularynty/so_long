@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/07/31 13:30:22 by prynty           ###   ########.fr       */
+/*   Updated: 2024/07/31 15:40:02 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct	s_game
     
     int     map_width;
     int     map_height;
-    char    **map; //2D array
+    char    **map;
 
     int     player_x;
     int     player_y;
@@ -68,7 +68,7 @@ t_game	*init_map(char *map);
 //validate_path.c
 size_t  player_position(t_game *game, char c);
 size_t  exit_position(t_game *game, char c);
-void    validate_path(t_game *game);
+void    flood_fill(t_game *game);
 
 //error_handling.c
 void    free_game(t_game *game);

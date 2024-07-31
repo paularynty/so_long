@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/07/31 14:00:55 by prynty           ###   ########.fr       */
+/*   Updated: 2024/07/31 15:52:07 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,6 @@ char    *read_map(char *map)
         line = get_next_line(map_fd);
     }
     close(map_fd);
-    if (ft_strlen(joined_line) == 0)
-    {
-        free(joined_line);
-        print_error("Empty map");
-    }
     return (joined_line);
 }
 
@@ -91,13 +86,17 @@ t_game  *init_game_struct(char **grid)
     }
     game->map = grid;
     game->map_width = ft_strlen(grid[0]);
-    ft_printf("Map width is %d characters\n", game->map_width);
+    // ft_printf("Map width is %d characters\n", game->map_width);
     game->map_height = count_rows(grid);
     game->collectables = count_collectables(game);
-    // game->player_x = player_position(game, 'x');
-    // game->player_y = player_position(game, 'y');
-    // game->exit_x = exit_position(game, 'x');
-    // game->exit_y = exit_position(game, 'y');
+    game->player_x = player_position(game, 'x');
+    ft_printf("Player is at position %d on x-axis\n", game->player_x);
+    game->player_y = player_position(game, 'y');
+    ft_printf("Player is at position %d on y-axis\n", game->player_y);
+    game->exit_x = exit_position(game, 'x');
+    ft_printf("Exit is at position %d on x-axis\n", game->exit_x);
+    game->exit_y = exit_position(game, 'y');
+    ft_printf("Exit is at position %d on y-axis\n", game->exit_y);
     game->steps = 0;
     game->won = 0;
     return (game);
@@ -117,12 +116,13 @@ t_game	*init_map(char *map)
         return (game);
     }
 	check_map_content(map_as_str);
+    // ft_printf("%s", map_as_str);
 	map_as_array = ft_split(map_as_str, '\n');
 	check_map_shape(map_as_array);
 	game = init_game_struct(map_as_array);
-    ft_printf("Map rows: %d\n", game->map_height);
+    // ft_printf("Map rows: %d\n", game->map_height);
 	check_walls(game);
-	// validate_path(game);
+	flood_fill(game);
 	free(map_as_str);
 	return (game);
 }
