@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/07/31 10:34:17 by prynty           ###   ########.fr       */
+/*   Updated: 2024/07/31 11:15:56 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ t_game	*init_map(char *map)
 	game = init_game_struct(map_as_array);
 	check_walls(game);
 	// validate_path(game);
+    //test;
 	free(map_as_str);
 	return (game);
 }
