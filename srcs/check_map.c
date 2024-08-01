@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:23:39 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/01 12:50:43 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/01 14:32:47 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,39 +89,52 @@ int    check_map_content(char *map)
             exit++;
         i++;
     }
-	if (collectables < 1)
+	if (player != 1 || exit != 1 || collectables < 1)
     {
-        print_error("Verify that map contains at least one collectable");
+        print_error("Verify player/collectable/exit values on map");
         return (1);
     }
     return (0);
 }
 
-void	check_walls(t_game *game)
+int check_walls(t_game *game)
 {
-	size_t i;
+	size_t  i;
 	
 	i = 0;
     while (i < game->map_width)
     {
         if (game->map[0][i] != '1')
+        {
             print_error("The map is not surrounded by walls (top row)");
+            return (1);
+        }
         i++;
     }
     i = 0;
     while (i < game->map_width)
     {
         if (game->map[game->map_height - 1][i] != '1')
+        {
             print_error("The map is not surrounded by walls (bottom row)");
+            return (1);
+        }
         i++;
     }
     i = 0;
     while (i < game->map_height)
     {
         if (game->map[i][0] != '1')
+        {
             print_error("The map is not surrounded by walls (left column)");
+            return (1);
+        }
         if (game->map[i][game->map_width - 1] != '1')
+        {
             print_error("The map is not surrounded by walls (right column)");
+            return (1);
+        }
         i++;
     }
+    return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/01 13:04:41 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/01 14:35:25 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ t_game  *init_game_struct(char **grid)
 {
     t_game  *game;
 
-    /// game = (t_game *){0};
-    game = (t_game *)ft_calloc(1, sizeof(t_game));
+    game = malloc(sizeof(t_game));
+	// game = (t_game *)ft_calloc(1, sizeof(t_game));
     if (!game)
     {
         free_game(game);
@@ -91,7 +91,6 @@ t_game  *init_game_struct(char **grid)
     }
     game->map = grid;
     game->map_width = ft_strlen(grid[0]);
-    // ft_printf("Map width is %d characters\n", game->map_width);
     game->map_height = count_rows(grid);
     game->collectables = count_collectables(game);
     game->player_x = player_position(game, 'x');
@@ -113,7 +112,6 @@ t_game	*init_map(char *map)
 	char	**map_as_array;
 	t_game	*game;
 
-    // game = NULL; //memset to null
     game = (t_game *){0};
     map_as_str = read_map(map);
 	if (check_empty_lines(map_as_str) || check_map_content(map_as_str))
@@ -129,7 +127,12 @@ t_game	*init_map(char *map)
         return (game);
     }
 	game = init_game_struct(map_as_array);
-	check_walls(game);
+	if (check_walls(game))
+    {
+        free(map_as_str);
+        free_game(game);
+        return (game);
+    }
 	flood_fill(game);
 	free(map_as_str);
 	return (game);

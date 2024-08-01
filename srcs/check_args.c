@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:21:11 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/01 12:55:03 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/01 14:39:14 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int check_args(int argc, char **argv)
         {
             print_error("Invalid map path, use format: ./so_long [map].ber");
             return (1);
-        }   
+        }
     }
     return (0);
 }
