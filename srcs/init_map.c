@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/07/31 15:52:07 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/01 13:04:41 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,11 @@ char    *read_map(char *map)
 
     map_fd = open(map, O_RDONLY);
     if (map_fd < 0)
-            print_error("Failed to open map, use format: ./so_long [map].ber");
+    {
+        close(map_fd);
+        print_error("Failed to open map, verify that map file exists");
+        exit(1);
+    }
     joined_line = ft_calloc(1, sizeof(char *));
     if (!joined_line)
         return (NULL);
@@ -78,6 +82,7 @@ t_game  *init_game_struct(char **grid)
 {
     t_game  *game;
 
+    /// game = (t_game *){0};
     game = (t_game *)ft_calloc(1, sizeof(t_game));
     if (!game)
     {
@@ -108,19 +113,22 @@ t_game	*init_map(char *map)
 	char	**map_as_array;
 	t_game	*game;
 
-    game = NULL;
+    // game = NULL; //memset to null
+    game = (t_game *){0};
     map_as_str = read_map(map);
-	if (check_empty_lines(map_as_str))
+	if (check_empty_lines(map_as_str) || check_map_content(map_as_str))
     {
         free(map_as_str);
         return (game);
     }
-	check_map_content(map_as_str);
-    // ft_printf("%s", map_as_str);
 	map_as_array = ft_split(map_as_str, '\n');
-	check_map_shape(map_as_array);
+	if (check_map_shape(map_as_array))
+    {
+        free(map_as_str);
+        free_map(map_as_array, count_rows(map_as_array));
+        return (game);
+    }
 	game = init_game_struct(map_as_array);
-    // ft_printf("Map rows: %d\n", game->map_height);
 	check_walls(game);
 	flood_fill(game);
 	free(map_as_str);

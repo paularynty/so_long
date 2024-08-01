@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:30:57 by prynty            #+#    #+#             */
-/*   Updated: 2024/07/31 13:27:21 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/01 12:49:07 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void    free_map(char **map, size_t height)
     while (i < height)
     {
         free(map[i]);
+        map[i] = NULL;
         i++;
     }
     free(map);

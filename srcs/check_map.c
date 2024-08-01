@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:23:39 by prynty            #+#    #+#             */
-/*   Updated: 2024/07/31 15:20:54 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/01 12:50:43 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int check_empty_lines(char *map)
     return (0);
 }
 
-void check_map_shape(char **grid)
+int check_map_shape(char **grid)
 {
 	size_t	i;
 	size_t	len;
@@ -44,12 +44,16 @@ void check_map_shape(char **grid)
 	while (grid[i])
 	{
 		if (ft_strlen(grid[i]) != len)
+        {
 			print_error("Map is not rectangular");
+            return (1);
+        }
 		i++;
 	}
+    return (0);
 }
 
-void    check_map_content(char *map)
+int    check_map_content(char *map)
 {
     size_t     i;
     size_t     player;
@@ -63,11 +67,20 @@ void    check_map_content(char *map)
 	while (map[i] != '\0')
 	{
         if (!(ft_strchr("PCE01\n", map[i])))
+        {
             print_error("Map contains invalid characters");
+            return (1);
+        }            
         if (map[i] == 'P' && player != 0)
+        {
             print_error("Verify that map contains only one player");
+            return (1);
+        }
         if (map[i] == 'E' && exit != 0)
+        {
             print_error("Verify that map contains only one exit");
+            return (1);
+        }
         if (map[i] == 'P')
             player++;
         if (map[i] == 'C')
@@ -76,8 +89,12 @@ void    check_map_content(char *map)
             exit++;
         i++;
     }
-	if (collectables < 1) 
-		print_error("Verify that map contains at least one collectable");
+	if (collectables < 1)
+    {
+        print_error("Verify that map contains at least one collectable");
+        return (1);
+    }
+    return (0);
 }
 
 void	check_walls(t_game *game)
