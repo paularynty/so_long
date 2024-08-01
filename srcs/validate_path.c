@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:33:01 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/01 12:49:22 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/01 15:49:14 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ size_t  exit_position(t_game *game, char c)
 
 int check_path(t_game *temp, size_t x, size_t y)
 {
-    if (temp->map[x][y] == '1')
-        return (0);
+    if (temp->map[x][y] == 'P')
+        return (1);
     if (temp->map[x][y] == 'C')
         temp->collectables--;
     if (temp->map[x][y] == 'E')
