@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:33:01 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/01 15:49:14 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/14 10:24:58 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,25 +62,27 @@ size_t  exit_position(t_game *game, char c)
     return (0);
 }
 
-int check_path(t_game *temp, size_t x, size_t y)
+int check_path(t_game *temp, size_t y, size_t x)
 {
-    if (temp->map[x][y] == 'P')
-        return (1);
-    if (temp->map[x][y] == 'C')
+    if (temp->map[y][x] == '1')
+        return (0);
+    if (temp->map[y][x] == '0')
+        return (0);
+    if (temp->map[y][x] == 'C')
         temp->collectables--;
-    if (temp->map[x][y] == 'E')
+    if (temp->map[y][x] == 'E')
     {
         temp->exit_x = 1;
         return (0);
     }
-    temp->map[x][y] = '1';
-    if (check_path(temp, x, y + 1))
+    temp->map[y][x] = '1';
+    if (check_path(temp, y + 1, x))
         return (1);
-    if (check_path(temp, x, y - 1))
+    if (check_path(temp, y - 1, y))
         return (1);
-    if (check_path(temp, x + 1, y))
+    if (check_path(temp, y, x + 1))
         return (1);
-    if (check_path(temp, x - 1, y))
+    if (check_path(temp, y, x - 1))
         return (1);
     return (0);
 }
@@ -105,7 +107,7 @@ void    flood_fill(t_game *game)
         temp.map[i] = ft_strdup(game->map[i]);
         i++;
     }
-    check_path(&temp, temp.player_x, temp.player_y);
+    check_path(&temp, temp.player_y, temp.player_x);
     if (!(temp.exit_x == 1 && temp.collectables == 0))
         print_error("No valid path available");
     free_map(temp.map, temp.map_height);    

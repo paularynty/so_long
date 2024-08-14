@@ -6,7 +6,7 @@
 #    By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 12:05:04 by prynty            #+#    #+#              #
-#    Updated: 2024/07/30 17:02:04 by prynty           ###   ########.fr        #
+#    Updated: 2024/08/14 10:34:02 by prynty           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ LIBFT		= ./libft/libft.a
 FILES 		= main.c \
 			check_args.c \
 			error_handling.c \
+			init_game.c \
 			init_map.c \
 			check_map.c \
 			validate_path.c \

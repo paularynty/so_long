@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:09:11 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/01 14:34:47 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/14 10:35:39 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 	if (check_args(argc, argv))
 		return (1);
 	game = init_map(argv[1]);
-	if(!game)
+	if (!game)
 		return (1);
 		//check elements PCE01;
 		//count_tile_size;

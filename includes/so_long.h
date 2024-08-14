@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/01 14:24:08 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/14 14:29:08 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,33 +20,55 @@
 # define CYAN "\033[1;96m"
 # define RESET "\033[0m"
 
+# define TILESIZE 32
+
+# define IMG_PLAYER "../textures/player.png"
+# define IMG_COLL "../textures/collectible.png"
+# define IMG_FLOOR "../textures/floor.png"
+# define IMG_WALL "../textures/wall.png"
+# define IMG_EXIT "../textures/exit.png"
+
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
 # include <stdlib.h>
 
+typedef struct  s_images
+{
+    mlx_image_t *player;
+    mlx_image_t *collectible;
+    mlx_image_t *wall;
+    mlx_image_t *floor;
+    mlx_image_t *exit;
+}   t_images;
+
+
 typedef struct	s_game
 {
-    void    *mlx_ptr;
-    void    *window_ptr;
+    void        *mlx_ptr;
+    void        *window_ptr;
     
-    int     map_width;
-    int     map_height;
-    char    **map;
+    int         map_width;
+    int         map_height;
+    char        **map;
 
-    int     player_x;
-    int     player_y;
-    int     player_dir;
+    mlx_t       *mlx;
 
-    int     exit_x;
-    int     exit_y;
+    t_images    images;
 
-    int     player;
-    int     exit;
-    int     collectables;
+    int         player_x;
+    int         player_y;
+    int         player_dir;
 
-    int     steps;
-    int     won;
+    int         exit_x;
+    int         exit_y;
+
+    int         player;
+    int         exit;
+    int         collectables;
+
+    int         steps;
+    int         won;
 }   t_game;
 
 //check_args.c
@@ -74,5 +96,10 @@ void    flood_fill(t_game *game);
 void    free_game(t_game *game);
 void    free_map(char **map, size_t height);
 void    print_error(char *message);
+
+//init_game.c
+int init_mlx(t_game *game, int width, int height);
+int init_game(t_game *game);
+mlx_image_t *load_image(mlx_t *mlx, char *imgfile);
 
 #endif
