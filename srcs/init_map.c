@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/15 14:34:42 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/15 15:19:38 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,13 @@ t_game  *init_game_struct(char **grid)
     game->map_height = count_rows(grid);
     game->collectables = count_collectables(game);
     game->player_x = player_position(game, 'x');
-    ft_printf("Player is at position %d on x-axis\n", game->player_x);
+   // ft_printf("Player is at position %d on x-axis\n", game->player_x);
     game->player_y = player_position(game, 'y');
-    ft_printf("Player is at position %d on y-axis\n", game->player_y);
+   // ft_printf("Player is at position %d on y-axis\n", game->player_y);
     game->exit_x = exit_position(game, 'x');
-    ft_printf("Exit is at position %d on x-axis\n", game->exit_x);
+   // ft_printf("Exit is at position %d on x-axis\n", game->exit_x);
     game->exit_y = exit_position(game, 'y');
-    ft_printf("Exit is at position %d on y-axis\n", game->exit_y);
+   // ft_printf("Exit is at position %d on y-axis\n", game->exit_y);
     game->steps = 0;
     game->won = 0;
     return (game);

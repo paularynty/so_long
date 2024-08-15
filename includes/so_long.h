@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/15 14:57:11 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/15 16:00:43 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 # define SUCCESS 0
 # define FAILURE -1
 
-# define IMG_PLAYER "textures/player.png"
+# define IMG_PLAYER "textures/watermelon.png"
 # define IMG_COLL "textures/Strawberry.png"
-# define IMG_FLOOR "textures/grass.png"
+# define IMG_FLOOR "textures/floor.png"
 # define IMG_WALL "textures/wall.png"
 # define IMG_EXIT "textures/exit.png"
 
@@ -39,7 +39,7 @@
 typedef struct  s_images
 {
     mlx_image_t *player;
-    mlx_image_t *collectible;
+    mlx_image_t *collectable;
     mlx_image_t *wall;
     mlx_image_t *floor;
     mlx_image_t *exit;
@@ -105,5 +105,7 @@ int         init_mlx(t_game *game, int width, int height);
 int         init_game(t_game *game);
 mlx_image_t *load_image(mlx_t *mlx, const char *imgfile);
 int         fill_background(t_game *game);
+int         draw_images(t_game *game, size_t y, size_t x);
+int         render_map(t_game *game);
 
 #endif
