@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:09:11 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/15 13:15:22 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/15 14:49:15 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_game	*game;
 
+	game = (t_game *){0};
 	if (check_args(argc, argv))
 		return (FAILURE);
 	game = init_map(argv[1]);
@@ -23,7 +24,10 @@ int	main(int argc, char **argv)
 		return (FAILURE);
 	if (!init_game(game))
 		return (FAILURE);
-	//next to loop
+	// mlx_key_hook(game->mlx);
+	// mlx_close_hook;
+	mlx_loop(game->mlx);
+	mlx_terminate(game->mlx);
 		//check elements PCE01;
 		//count_tile_size;
 		//load_images;

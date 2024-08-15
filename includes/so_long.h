@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/15 12:45:18 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/15 14:57:11 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@
 # define CYAN "\033[1;96m"
 # define RESET "\033[0m"
 
-# define TILESIZE 32
+# define TILESIZE 64
 
 # define SUCCESS 0
 # define FAILURE -1
 
 # define IMG_PLAYER "textures/player.png"
 # define IMG_COLL "textures/Strawberry.png"
-# define IMG_FLOOR "textures/floor.png"
+# define IMG_FLOOR "textures/grass.png"
 # define IMG_WALL "textures/wall.png"
 # define IMG_EXIT "textures/exit.png"
 
@@ -104,5 +104,6 @@ void        print_error(char *message);
 int         init_mlx(t_game *game, int width, int height);
 int         init_game(t_game *game);
 mlx_image_t *load_image(mlx_t *mlx, const char *imgfile);
+int         fill_background(t_game *game);
 
 #endif

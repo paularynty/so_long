@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/01 15:31:33 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/15 14:34:42 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ t_game	*init_map(char *map)
 	char	**map_as_array;
 	t_game	*game;
 
-    game = (t_game *){0};
+    // game = (t_game *){0};
     map_as_str = read_map(map);
 	if (check_empty_lines(map_as_str) || check_map_content(map_as_str))
     {

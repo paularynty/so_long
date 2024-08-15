@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:29:55 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/15 12:53:46 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/15 14:56:36 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,31 @@ int init_game(t_game *game)
     {
         mlx_terminate(game->mlx);
         return (0);
+    }
+    fill_background(game);
+    return (1);
+}
+
+int fill_background(t_game *game)
+{
+    size_t  x;
+    size_t  y;
+    
+    x = 0;
+    y = 0;
+    while (y < game->map_height)
+    {
+        x = 0;
+        while (x < game->map_width)
+        {
+            if (mlx_image_to_window(game->mlx, game->images.floor, x * TILESIZE, y * TILESIZE) < 0)
+                {
+                    print_error("Failed to put floor image to window");
+                    return (FAILURE);
+                }
+                x++;
+        }
+        y++;
     }
     return (1);
 }
