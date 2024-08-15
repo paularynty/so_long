@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/14 14:29:08 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/15 12:45:18 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@
 
 # define TILESIZE 32
 
-# define IMG_PLAYER "../textures/player.png"
-# define IMG_COLL "../textures/collectible.png"
-# define IMG_FLOOR "../textures/floor.png"
-# define IMG_WALL "../textures/wall.png"
-# define IMG_EXIT "../textures/exit.png"
+# define SUCCESS 0
+# define FAILURE -1
+
+# define IMG_PLAYER "textures/player.png"
+# define IMG_COLL "textures/Strawberry.png"
+# define IMG_FLOOR "textures/floor.png"
+# define IMG_WALL "textures/wall.png"
+# define IMG_EXIT "textures/exit.png"
 
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
@@ -72,34 +75,34 @@ typedef struct	s_game
 }   t_game;
 
 //check_args.c
-int check_args(int argc, char **argv);
+int         check_args(int argc, char **argv);
 
 //check_map.c
-int check_empty_lines(char *map);
-int check_map_shape(char **grid);
-int check_map_content(char *map);
-int check_walls(t_game *game);
-size_t  count_rows(char **grid);
-size_t	count_collectables(t_game *game);
+int         check_empty_lines(char *map);
+int         check_map_shape(char **grid);
+int         check_map_content(char *map);
+int         check_walls(t_game *game);
+size_t      count_rows(char **grid);
+size_t	    count_collectables(t_game *game);
 
 //init_map.c
-char    *read_map(char *map);
-t_game  *init_game_struct(char **grid);
-t_game	*init_map(char *map);
+char        *read_map(char *map);
+t_game      *init_game_struct(char **grid);
+t_game	    *init_map(char *map);
 
 //validate_path.c
-size_t  player_position(t_game *game, char c);
-size_t  exit_position(t_game *game, char c);
-void    flood_fill(t_game *game);
+size_t      player_position(t_game *game, char c);
+size_t      exit_position(t_game *game, char c);
+void        flood_fill(t_game *game);
 
 //error_handling.c
-void    free_game(t_game *game);
-void    free_map(char **map, size_t height);
-void    print_error(char *message);
+void        free_game(t_game *game);
+void        free_map(char **map, size_t height);
+void        print_error(char *message);
 
 //init_game.c
-int init_mlx(t_game *game, int width, int height);
-int init_game(t_game *game);
-mlx_image_t *load_image(mlx_t *mlx, char *imgfile);
+int         init_mlx(t_game *game, int width, int height);
+int         init_game(t_game *game);
+mlx_image_t *load_image(mlx_t *mlx, const char *imgfile);
 
 #endif

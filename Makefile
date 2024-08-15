@@ -6,7 +6,7 @@
 #    By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 12:05:04 by prynty            #+#    #+#              #
-#    Updated: 2024/08/14 10:34:02 by prynty           ###   ########.fr        #
+#    Updated: 2024/08/15 10:55:52 by prynty           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,10 @@ REMAKE		= echo "✅ $(GREEN)Successfully cleaned and rebuilt everything!$(RESET)
 
 NAME		= so_long
 CFLAGS		= -Wall -Wextra -Werror
+OSFLAGS		= -ldl -lglfw -pthread -lm
 LIBFT		= ./libft/libft.a
+MLXDIR		= ./MLX42
+LIBMLX		= $(MLXDIR)/build/libmlx42.a
 
 FILES 		= main.c \
 			check_args.c \
@@ -70,7 +73,7 @@ $(NAME): $(OBJS)
 	@$(COMP_LIBFT)
 	@make -C ./libft
 	@cp $(LIBFT) .
-	@cc -g $(FLAGS) $(SRCS) libft.a -o $(NAME)
+	@cc -g $(FLAGS) $(SRCS) $(LIBMLX) $(LIBFT) $(OSFLAGS) -o $(NAME)
 	@chmod 777 $(NAME)
 	@$(SL_READY)
 

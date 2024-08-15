@@ -6,17 +6,18 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:29:55 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/14 14:33:56 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/15 12:53:46 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-mlx_image_t *load_image(mlx_t *mlx, char *imgfile)
+mlx_image_t *load_image(mlx_t *mlx, const char *imgfile)
 {
     mlx_texture_t   *texture;
     mlx_image_t     *image;
     
+    image = NULL;
     texture = mlx_load_png(imgfile);
     if (!texture)
     {
@@ -24,6 +25,11 @@ mlx_image_t *load_image(mlx_t *mlx, char *imgfile)
         return (0);
     }
     image = mlx_texture_to_image(mlx, texture);
+    if (!image)
+    {
+        print_error("Problem with texture to image");
+        return (0);
+    }
     mlx_delete_texture(texture);
     return (image);
 }
@@ -43,13 +49,13 @@ int init_mlx(t_game *game, int width, int height)
     return (1);
 }
 
-int init_game_images(mlx_t *mlx, t_game *game)
-{
-    game->images.player = load_image(mlx, IMG_PLAYER);
-    game->images.collectible = load_image(mlx, IMG_COLL);
-    game->images.wall = load_image(mlx, IMG_WALL);
-    game->images.floor = load_image(mlx, IMG_FLOOR);
-    game->images.exit = load_image(mlx, IMG_EXIT);
+int init_game_images(t_game *game)
+{   
+    game->images.player = load_image(game->mlx, IMG_PLAYER);
+    game->images.collectible = load_image(game->mlx, IMG_COLL);
+    game->images.wall = load_image(game->mlx, IMG_WALL);
+    game->images.floor = load_image(game->mlx, IMG_FLOOR);
+    game->images.exit = load_image(game->mlx, IMG_EXIT);
     if (!game->images.player || !game->images.collectible 
         || !game->images.wall || !game->images.floor || !game->images.exit)
         return (0);
@@ -58,8 +64,8 @@ int init_game_images(mlx_t *mlx, t_game *game)
 
 int init_game(t_game *game)
 {
-    int width;
-    int height;
+    int     width;
+    int     height;
 
     width = game->map_width * TILESIZE;
     if (width < 300)
