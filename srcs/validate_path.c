@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:33:01 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/14 10:24:58 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/22 18:41:54 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,6 @@ void    flood_fill(t_game *game)
     check_path(&temp, temp.player_y, temp.player_x);
     if (!(temp.exit_x == 1 && temp.collectables == 0))
         print_error("No valid path available");
+        //here should exit
     free_map(temp.map, temp.map_height);    
 }
