@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/15 16:00:43 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/22 18:21:34 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@
 # define RESET "\033[0m"
 
 # define TILESIZE 64
+# define TILESIZE_P 80
 
 # define SUCCESS 0
 # define FAILURE -1
 
-# define IMG_PLAYER "textures/watermelon.png"
+# define IMG_PLAYER "textures/player.png"
 # define IMG_COLL "textures/Strawberry.png"
 # define IMG_FLOOR "textures/floor.png"
 # define IMG_WALL "textures/wall.png"
@@ -107,5 +108,8 @@ mlx_image_t *load_image(mlx_t *mlx, const char *imgfile);
 int         fill_background(t_game *game);
 int         draw_images(t_game *game, size_t y, size_t x);
 int         render_map(t_game *game);
+
+//game.c
+void        move_hook(void *param);
 
 #endif
