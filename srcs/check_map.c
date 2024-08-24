@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:23:39 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/15 12:59:37 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 20:08:11 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,30 @@ int check_map_shape(char **grid)
 		i++;
 	}
     return (0);
+}
+
+size_t	count_collectables(t_game *game)
+{
+	size_t	y;
+	size_t	x;
+	size_t	collectables;
+
+	y = 0;
+	collectables = 0;
+	while (y < game->map_height)
+	{
+		x = 0;
+		while (x < game->map_width)
+		{
+			if (game->map[y][x] == 'C')
+			{
+				collectables++;
+			}
+			x++;
+		}
+		y++;
+	}
+	return (collectables);
 }
 
 int    check_map_content(char *map)

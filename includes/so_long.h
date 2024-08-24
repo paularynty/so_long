@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/24 18:54:22 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 20:26:27 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct  s_images
 
 typedef struct	s_game
 {
+    char        *file;
+
     void        *mlx_ptr;
     void        *window_ptr;
     
