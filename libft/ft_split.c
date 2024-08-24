@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:14:53 by prynty            #+#    #+#             */
-/*   Updated: 2024/07/30 14:16:06 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 15:11:12 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,64 +83,64 @@
 // 	return (array);
 // }
 
-static char	**ft_free(char **s)
+static char	**ft_free(char **str)
 {
 	int	i;
 
 	i = 0;
-	while (s[i])
+	while (str[i])
 	{
-		free(s[i]);
+		free(str[i]);
 		i++;
 	}
-	free(s);
+	free(str);
 	return (NULL);
 }
 
-static int	ft_get_rows(char const *s, char c)
+static int	ft_get_rows(char const *str, char chr)
 {
 	int	rows;
 	int	i;
 
 	rows = 0;
 	i = 0;
-	while (s[i])
+	while (str[i])
 	{
-		while (s[i] == c)
+		while (str[i] == chr)
 			i++;
-		if (s[i] != '\0')
+		if (str[i] != '\0')
 			rows++;
-		while (s[i] && s[i] != c)
+		while (str[i] && str[i] != chr)
 				i++;
 	}
 	return (rows);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *str, char chr)
 {
-	char	**new;
+	char	**array;
 	char	*wordstart;
 	int		i;
 
-	new = (char **)malloc(sizeof(char *) * (ft_get_rows(s, c) + 1));
-	if (!new)
+	array = (char **)malloc(sizeof(char *) * (ft_get_rows(str, chr) + 1));
+	if (!array)
 		return (NULL);
 	i = 0;
-	while (*s)
+	while (*str)
 	{
-		if (*s != c)
+		if (*str != chr)
 		{
-			wordstart = (char *)s;
-			while (*s != c && *s)
-				s++;
-			new[i] = ft_substr(wordstart, 0, s - wordstart);
-			if (!**new)
-				return (ft_free(new));
+			wordstart = (char *)str;
+			while (*str && *str != chr)
+				str++;
+			array[i] = ft_substr(wordstart, 0, str - wordstart);
+			if (!**array)
+				return (ft_free(array));
 			i++;
 		}
 		else
-			s++;
+			str++;
 	}
-	new[i] = NULL;
-	return (new);
+	array[i] = NULL;
+	return (array);
 }

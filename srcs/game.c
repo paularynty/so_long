@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:00:50 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/24 14:58:27 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 16:08:09 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void    end_game(t_game *game, mlx_t *mlx)
 {
     if (game->won == 1)
     {
-        ft_printf("You won!\n");
+        ft_printf("Success! Dragon's belly is full!\n");
+        ft_printf("You completed the game in %d moves. Can you do better? 🥝\n", game->steps);
     }
     if (game->won == 0)
     {

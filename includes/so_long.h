@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/24 14:58:41 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 15:26:28 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct	s_game
     int         collectables;
 
     int         steps;
+    int         score;
     int         won;
 }   t_game;
 
@@ -112,7 +113,7 @@ int         fill_background(t_game *game);
 int         draw_images(t_game *game, size_t y, size_t x);
 int         render_map(t_game *game);
 
-//game.c
+//game.c & movement.c
 void    key_hooks(mlx_key_data_t keydata, void *param);
 void    end_game(t_game *game, mlx_t *mlx);
 
