@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 12:34:09 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/24 16:10:15 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 17:12:49 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void move_player(t_game *game, int x, int y)
     game->player_x = x;
     game->player_y = y;
     game->steps++;
-    ft_printf("Steps: %d\n", game->steps);
+    ft_printf("🥝 Steps: %d\n", game->steps);
 }
 
 void    key_hooks(mlx_key_data_t keydata, void *param)

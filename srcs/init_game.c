@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:29:55 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/24 15:43:23 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 16:17:53 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int init_mlx(t_game *game, int width, int height)
 {
     mlx_t   *mlx;
 
-    mlx = mlx_init(width, height, "Yay my game", true);
+    mlx = mlx_init(width, height, "Baby Dragon's Lunchtime", true);
     if (!mlx)
     {
         free_map(game->map, game->map_height);
