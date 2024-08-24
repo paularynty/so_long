@@ -6,14 +6,13 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:39:24 by prynty            #+#    #+#             */
-/*   Updated: 2024/04/26 10:25:26 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 18:13:40 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-static size_t	get_digits(int n)
+static size_t	get_len(int n)
 {
 	size_t	len;
 
@@ -30,27 +29,29 @@ static size_t	get_digits(int n)
 
 char	*ft_itoa(int n)
 {
-	char	*num_str;
-	size_t	digits;
-	long	num;
+	char	*str;
+	size_t	len;
+	long	nbr;
 
-	num = n;
-	digits = get_digits(n);
-	if (n < 0)
-	{
-		num *= -1;
-		digits++;
-	}
-	num_str = (char *)malloc(sizeof(char) * (digits + 1));
-	if (!num_str)
+	nbr = n;
+	len = get_len(n);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
 		return (NULL);
-	num_str[digits] = '\0';
-	while (digits--)
+	if (nbr < 0)
+		nbr *= -1;
+	if (n == 0)
 	{
-		num_str[digits] = num % 10 + '0';
-		num /= 10;
+		str[0] = '0';
+		return (str);
+	}
+	str[len] = '\0';
+	while (len--)
+	{
+		str[len] = nbr % 10 + '0';
+		nbr /= 10;
 	}
 	if (n < 0)
-		num_str[0] = '-';
-	return (num_str);
+		str[0] = '-';
+	return (str);
 }

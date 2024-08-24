@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:29:55 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/24 16:17:53 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 17:31:02 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int init_game_images(t_game *game)
     game->images.exit = load_image(game->mlx, IMG_EXIT);
     if (!game->images.player || !game->images.collectable 
         || !game->images.wall || !game->images.floor || !game->images.exit)
-        return (0);
-    return (1);
+        return (FAILURE);
+    return (SUCCESS);
 }
 
 int init_game(t_game *game)
@@ -70,16 +70,16 @@ int init_game(t_game *game)
     width = game->map_width * TILESIZE;
     height = game->map_height * TILESIZE;
     if (!init_mlx(game, width, height))
-        return (0);
+        return (FAILURE);
     mlx_set_setting(MLX_STRETCH_IMAGE, 1);
-    if (!init_game_images(game))
+    if (init_game_images(game) == -1)
     {
         mlx_terminate(game->mlx);
-        return (0);
+        return (FAILURE);
     }
     fill_background(game);
     render_map(game);
-    return (1);
+    return (SUCCESS);
 }
 
 int fill_background(t_game *game)

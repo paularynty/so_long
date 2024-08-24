@@ -6,7 +6,7 @@
 #    By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 12:05:04 by prynty            #+#    #+#              #
-#    Updated: 2024/08/24 14:52:58 by prynty           ###   ########.fr        #
+#    Updated: 2024/08/24 17:32:30 by prynty           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ FILES 		= main.c \
 			init_game.c \
 			init_map.c \
 			check_map.c \
-			game.c \
+			game_text.c \
 			movement.c \
 			validate_path.c \
 

@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/24 15:26:28 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 18:54:22 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,12 @@ typedef struct  s_images
 {
     mlx_image_t *player;
     mlx_image_t *collectable;
+    mlx_image_t *collectable_screen;
     mlx_image_t *wall;
     mlx_image_t *floor;
     mlx_image_t *exit;
+    mlx_image_t *move_counter;
+    mlx_image_t *moves;
 }   t_images;
 
 
@@ -113,8 +116,13 @@ int         fill_background(t_game *game);
 int         draw_images(t_game *game, size_t y, size_t x);
 int         render_map(t_game *game);
 
-//game.c & movement.c
-void    key_hooks(mlx_key_data_t keydata, void *param);
-void    end_game(t_game *game, mlx_t *mlx);
+//game_text.c
+void        start_game(void);
+void        string_to_screen(t_game *game);
+void        print_moves(t_game *game);
+void        print_collectables(t_game *game);
+void        end_game(t_game *game, mlx_t *mlx);
 
+//movement.c
+void        key_hooks(mlx_key_data_t keydata, void *param);
 #endif

@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 12:34:09 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/24 17:12:49 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 18:49:15 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,15 @@ static void move_player(t_game *game, int x, int y)
     {
         update_movement(game, x, y);
         collect_item(game, x, y);
+        ft_printf("🍓 Collected a fruit!\n");
+        print_collectables(game);
     }
     if (validate_exit(game, x, y) == -1)
         return ;
     game->player_x = x;
     game->player_y = y;
     game->steps++;
+    print_moves(game);
     ft_printf("🥝 Steps: %d\n", game->steps);
 }
 
