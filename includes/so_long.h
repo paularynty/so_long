@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/22 18:21:34 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 13:25:10 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ size_t	    count_collectables(t_game *game);
 //init_map.c
 char        *read_map(char *map);
 t_game      *init_game_struct(char **grid);
-t_game	    *init_map(char *map);
+t_game      *init_map(char *map);
 
 //validate_path.c
 size_t      player_position(t_game *game, char c);
@@ -110,6 +110,6 @@ int         draw_images(t_game *game, size_t y, size_t x);
 int         render_map(t_game *game);
 
 //game.c
-void        move_hook(void *param);
+void    key_hooks(mlx_key_data_t keydata, void *param);
 
 #endif

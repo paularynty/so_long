@@ -6,7 +6,7 @@
 #    By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 12:05:04 by prynty            #+#    #+#              #
-#    Updated: 2024/08/22 17:30:03 by prynty           ###   ########.fr        #
+#    Updated: 2024/08/24 12:49:16 by prynty           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,8 +53,8 @@ FILES 		= main.c \
 			error_handling.c \
 			init_game.c \
 			init_map.c \
-			key_hooks.c \
 			check_map.c \
+			movement.c \
 			validate_path.c \
 
 SRCS		= $(addprefix srcs/, $(FILES))

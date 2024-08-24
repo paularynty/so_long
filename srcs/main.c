@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:09:11 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/22 18:41:58 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 12:51:25 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	// mlx_close_hook;
 	ft_printf("Welcome to my game!\n");
 	// string_to_screen(game);
-	// mlx_key_hook(game->mlx, move_hook, game);
+	mlx_key_hook(game->mlx, &key_hooks, game);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
 		//check elements PCE01;
