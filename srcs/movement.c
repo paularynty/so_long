@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 12:34:09 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/24 12:48:45 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 14:02:02 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ static void move_player(int x, int y, t_game *game)
 {
     if (game->map[y][x] == '1')
         return ;
+    game->player_x = x;
+    game->player_y = y;
+    game->steps++;
     ft_printf("Steps: %d\n", game->steps);
 }
 

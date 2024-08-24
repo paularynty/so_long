@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:29:55 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/22 18:21:54 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 14:27:31 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ int init_game(t_game *game)
     int     height;
 
     width = game->map_width * TILESIZE;
-    if (width < 300)
-        width = 300;
+    // if (width < 300)
+    //     width = 300;
     height = game->map_height * TILESIZE;
     if (!init_mlx(game, width, height))
         return (0);
@@ -109,14 +109,14 @@ int fill_background(t_game *game)
 
 int draw_images(t_game *game, size_t y, size_t x)
 {
-    // if (game->map[y][x] == '1')
-    // {
-    //     if (mlx_image_to_window(game->mlx, game->images.wall, x * TILESIZE, y * TILESIZE) < 0)
-    //             {
-    //                 print_error("Failed to put wall image to window");
-    //                 return (FAILURE);
-    //             }
-    // }
+    if (game->map[y][x] == '1')
+    {
+        if (mlx_image_to_window(game->mlx, game->images.wall, x * TILESIZE, y * TILESIZE) < 0)
+                {
+                    print_error("Failed to put wall image to window");
+                    return (FAILURE);
+                }
+    }
     if (game->map[y][x] == 'C')
     {
         if (mlx_image_to_window(game->mlx, game->images.collectable, x * TILESIZE, y * TILESIZE) < 0)
@@ -133,14 +133,14 @@ int draw_images(t_game *game, size_t y, size_t x)
                     return (FAILURE);
                 }
     }
-    // else if (game->map[y][x] == 'E')
-    // {
-    //     if (mlx_image_to_window(game->mlx, game->images.exit, x * TILESIZE, y * TILESIZE) < 0)
-    //             {
-    //                 print_error("Failed to put exit image to window");
-    //                 return (FAILURE);
-    //             }
-    // }
+    else if (game->map[y][x] == 'E')
+    {
+        if (mlx_image_to_window(game->mlx, game->images.exit, x * TILESIZE, y * TILESIZE) < 0)
+                {
+                    print_error("Failed to put exit image to window");
+                    return (FAILURE);
+                }
+    }
     return (1);
 }
 

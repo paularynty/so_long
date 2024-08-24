@@ -6,22 +6,24 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/24 13:25:10 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 14:26:45 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# define GREEN "\033[0;32m"
+# define GREEN "\033[1;32m"
 # define RED "\033[1;31m"
 # define PINK "\e[1m\e[38;5;205m"
 # define GREY "\033[0;90m"
 # define CYAN "\033[1;96m"
 # define RESET "\033[0m"
 
-# define TILESIZE 64
-# define TILESIZE_P 80
+# define TILESIZE 100
+
+# define SCREEN_WIDTH 3200
+# define SCREEN_HEIGHT 1800
 
 # define SUCCESS 0
 # define FAILURE -1
