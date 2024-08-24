@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:29:55 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/24 14:27:31 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 14:46:49 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ int init_game(t_game *game)
     int     height;
 
     width = game->map_width * TILESIZE;
-    // if (width < 300)
-    //     width = 300;
     height = game->map_height * TILESIZE;
     if (!init_mlx(game, width, height))
         return (0);

@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/24 14:26:45 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 14:58:41 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define CYAN "\033[1;96m"
 # define RESET "\033[0m"
 
-# define TILESIZE 100
+# define TILESIZE 32
 
 # define SCREEN_WIDTH 3200
 # define SCREEN_HEIGHT 1800
@@ -99,6 +99,7 @@ size_t      exit_position(t_game *game, char c);
 void        flood_fill(t_game *game);
 
 //error_handling.c
+void        clean_game(t_game *game);
 void        free_game(t_game *game);
 void        free_map(char **map, size_t height);
 void        print_error(char *message);
@@ -113,5 +114,6 @@ int         render_map(t_game *game);
 
 //game.c
 void    key_hooks(mlx_key_data_t keydata, void *param);
+void    end_game(t_game *game, mlx_t *mlx);
 
 #endif

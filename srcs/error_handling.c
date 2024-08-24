@@ -6,11 +6,40 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:30:57 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/24 13:53:39 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 14:57:41 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+void    clean_game(t_game *game)
+{
+    size_t  i;
+
+    if (game->mlx)
+    {
+        if (game->images.wall)
+            mlx_delete_image(game->mlx, game->images.wall);
+        if (game->images.floor)
+            mlx_delete_image(game->mlx, game->images.floor);
+        if (game->images.collectable)
+            mlx_delete_image(game->mlx, game->images.collectable);
+        if (game->images.exit)
+            mlx_delete_image(game->mlx, game->images.exit);
+        if (game->images.player)
+            mlx_delete_image(game->mlx, game->images.player);
+        mlx_terminate(game->mlx);
+        game->mlx = NULL;
+    }
+    i = 0;
+    if (game->map)
+    {
+        while (game->map[i])
+            free(game->map[i++]);
+        free(game->map);
+        game->map = NULL;
+    }
+}
 
 void free_game(t_game *game)
 {

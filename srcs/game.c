@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:00:50 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/22 17:29:44 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/24 14:58:27 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,17 @@
     
 // }
 
-// void    end_game(t_game *game, mlx_t *mlx)
-// {
-//     if (game->won == 1)
-//     {
-//         ft_printf("You won!\n");
-//     }
-//     if (game->won == 0)
-//     {
-//         ft_printf("The game ended. Why not try again?\n");
-//     }
-//     mlx_close_window(mlx);
-//     mlx_terminate(mlx);
-// }
+void    end_game(t_game *game, mlx_t *mlx)
+{
+    if (game->won == 1)
+    {
+        ft_printf("You won!\n");
+    }
+    if (game->won == 0)
+    {
+        ft_printf("The game ended. Why not try again?\n");
+    }
+    clean_game(game);
+    // mlx_close_window(mlx);
+    // mlx_terminate(mlx);
+}
