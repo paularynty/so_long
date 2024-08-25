@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/24 20:26:27 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/25 18:26:23 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ typedef struct  s_images
     mlx_image_t *moves;
 }   t_images;
 
+typedef struct  s_position
+{
+    int x;
+    int y;
+}   t_position;
 
 typedef struct	s_game
 {
@@ -66,6 +71,8 @@ typedef struct	s_game
     mlx_t       *mlx;
 
     t_images    images;
+
+    t_position  position;
 
     int         player_x;
     int         player_y;
@@ -101,8 +108,7 @@ t_game      *init_map(char *map);
 
 //validate_path.c
 size_t      player_position(t_game *game, char c);
-size_t      exit_position(t_game *game, char c);
-void        flood_fill(t_game *game);
+int         validate_path(t_game *game, t_position position);
 
 //error_handling.c
 void        clean_game(t_game *game);

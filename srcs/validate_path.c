@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:33:01 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/22 18:41:54 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/25 18:25:49 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,79 +37,71 @@ size_t  player_position(t_game *game, char c)
     return (0);
 }
 
-size_t  exit_position(t_game *game, char c)
+static char **create_temp_map(t_game *game)
 {
-    size_t  x;
-    size_t  y;
-
-    y = 0;
-    while (y < game->map_height)
-    {
-        x = 0;
-        while (x < game->map_width)
-        {
-            if (game->map[y][x] == 'E')
-            {
-                if (c == 'x')
-                    return (x);
-                else
-                    return (y);
-            }
-            x++;
-        }
-        y++;
-    }
-    return (0);
-}
-
-int check_path(t_game *temp, size_t y, size_t x)
-{
-    if (temp->map[y][x] == '1')
-        return (0);
-    if (temp->map[y][x] == '0')
-        return (0);
-    if (temp->map[y][x] == 'C')
-        temp->collectables--;
-    if (temp->map[y][x] == 'E')
-    {
-        temp->exit_x = 1;
-        return (0);
-    }
-    temp->map[y][x] = '1';
-    if (check_path(temp, y + 1, x))
-        return (1);
-    if (check_path(temp, y - 1, y))
-        return (1);
-    if (check_path(temp, y, x + 1))
-        return (1);
-    if (check_path(temp, y, x - 1))
-        return (1);
-    return (0);
-}
-
-void    flood_fill(t_game *game)
-{
-    t_game  temp;
     size_t  i;
+    char    **temp_map;
 
-    temp.map_height = game->map_height;
-    temp.map_width = game->map_width;
-    temp.collectables = game->collectables;
-    temp.player_x = game->player_x;
-    temp.player_y = game->player_y;
-    temp.exit_x = 0;
-    temp.map = (char **)malloc(temp.map_height * sizeof(char *));
-    if (!temp.map)
-        print_error("Memory allocation failed");
+    temp_map = (char **)malloc(sizeof(char *) * (game->map_height + 1));
+    if (!temp_map)
+        return (NULL);
     i = 0;
-    while (i < temp.map_height)
+    while (i < game->map_height)
     {
-        temp.map[i] = ft_strdup(game->map[i]);
+        temp_map[i] = ft_strdup(game->map[i]);
+        if (!temp_map[i])
+        {
+            while (i > 0)
+            {
+                free(temp_map[i - 1]);
+                i--;
+            }
+            free(temp_map);
+            return (NULL);
+        }
         i++;
     }
-    check_path(&temp, temp.player_y, temp.player_x);
-    if (!(temp.exit_x == 1 && temp.collectables == 0))
-        print_error("No valid path available");
-        //here should exit
-    free_map(temp.map, temp.map_height);    
+    temp_map[game->map_height] = NULL;
+    return (temp_map);
+}
+
+static int	flood_fill(t_game *game, char **temp_map, t_position position)
+{
+	static int	collectables = 0;
+	static int	exit_found = 0;
+
+	if (temp_map[position.y][position.x] == '1')
+		return (0);
+	else if (temp_map[position.y][position.x] == 'C')
+		collectables++;
+	else if (temp_map[position.y][position.x] == 'E')
+	{
+		exit_found = 1;
+		return (0);
+	}
+	temp_map[position.y][position.x] = '1';
+	flood_fill(game, temp_map, (t_position){position.x + 1, position.y});
+	flood_fill(game, temp_map, (t_position){position.x - 1, position.y});
+	flood_fill(game, temp_map, (t_position){position.x, position.y + 1});
+	flood_fill(game, temp_map, (t_position){position.x, position.y - 1});
+	if (collectables == game->collectables && exit_found)
+		return (1);
+	return (0);
+}
+
+int	validate_path(t_game *game, t_position position)
+{
+    size_t	i;
+	int		result;
+	char	**temp;
+
+	temp = create_temp_map(game);
+	if (!temp)
+		print_error("Memory allocation failed");
+	result = flood_fill(game, temp, position);
+	i = 0;
+	while (i < game->map_height)
+		free(temp[i++]);
+	free(temp);
+	return (result);
 }

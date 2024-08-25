@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/24 20:47:10 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/25 18:26:38 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,18 @@ t_game  *init_game_struct(char **grid)
     game->collectables = count_collectables(game);
     game->player_x = player_position(game, 'x');
     game->player_y = player_position(game, 'y');
-    game->exit_x = exit_position(game, 'x');
-    game->exit_y = exit_position(game, 'y');
     game->steps = 0;
     game->won = 0;
+    game->score = 0;
     return (game);
 }
 
 t_game *init_map(char *map)
 {
-	char	*map_as_str;
-	char	**map_as_array;
-	t_game	*game;
+    t_game      *game;
+	char	    *map_as_str;
+	char	    **map_as_array;
+    t_position  player_start;
 
     map_as_str = read_map(map);
 	if (check_empty_lines(map_as_str) || check_map_content(map_as_str))
@@ -104,7 +104,9 @@ t_game *init_map(char *map)
         free_game(game);
         return (0);
     }
-	flood_fill(game);
+    player_start = (t_position){game->player_x, game->player_y};
+	if (!validate_path(game, player_start))
+        print_error("No valid path available");
 	free(map_as_str);
 	return (game);
 }
