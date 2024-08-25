@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/25 18:26:23 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/25 21:03:49 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@
 # define FAILURE -1
 
 # define IMG_PLAYER "textures/player.png"
-# define IMG_COLL "textures/Strawberry.png"
+// # define IMG_COLL "textures/strawberry.png"
+# define IMG_FRUIT1 "textures/kiwi.png"
+# define IMG_FRUIT2 "textures/orange.png"
+# define IMG_FRUIT3 "textures/strawberry.png"
 # define IMG_FLOOR "textures/floor.png"
 # define IMG_WALL "textures/wall.png"
 # define IMG_EXIT "textures/exit.png"
@@ -42,6 +45,9 @@
 typedef struct  s_images
 {
     mlx_image_t *player;
+    mlx_image_t *fruit1;
+    mlx_image_t *fruit2;
+    mlx_image_t *fruit3;
     mlx_image_t *collectable;
     mlx_image_t *collectable_screen;
     mlx_image_t *wall;

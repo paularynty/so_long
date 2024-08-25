@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:29:55 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/24 17:31:02 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/25 20:53:30 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,16 @@ int init_mlx(t_game *game, int width, int height)
 int init_game_images(t_game *game)
 {   
     game->images.player = load_image(game->mlx, IMG_PLAYER);
-    game->images.collectable = load_image(game->mlx, IMG_COLL);
+    // game->images.collectable = load_image(game->mlx, IMG_COLL);
+    game->images.fruit1 = load_image(game->mlx, IMG_FRUIT1);
+    game->images.fruit2 = load_image(game->mlx, IMG_FRUIT2);
+    game->images.fruit3 = load_image(game->mlx, IMG_FRUIT3);
     game->images.wall = load_image(game->mlx, IMG_WALL);
     game->images.floor = load_image(game->mlx, IMG_FLOOR);
     game->images.exit = load_image(game->mlx, IMG_EXIT);
-    if (!game->images.player || !game->images.collectable 
-        || !game->images.wall || !game->images.floor || !game->images.exit)
+    if (!game->images.player || !game->images.fruit1 || !game->images.fruit2
+        || !game->images.fruit3 || !game->images.wall || !game->images.floor
+        || !game->images.exit)
         return (FAILURE);
     return (SUCCESS);
 }
@@ -106,39 +110,91 @@ int fill_background(t_game *game)
     return (1);
 }
 
-int draw_images(t_game *game, size_t y, size_t x)
+// int draw_images(t_game *game, size_t y, size_t x)
+// {
+//     if (game->map[y][x] == '1')
+//     {
+//         if (mlx_image_to_window(game->mlx, game->images.wall, x * TILESIZE, y * TILESIZE) < 0)
+//                 {
+//                     print_error("Failed to put wall image to window");
+//                     return (FAILURE);
+//                 }
+//     }
+//     if (game->map[y][x] == 'C')
+//     {
+//         if (mlx_image_to_window(game->mlx, game->images.collectable, x * TILESIZE, y * TILESIZE) < 0)
+//                 {
+//                     print_error("Failed to put collectable image to window");
+//                     return (FAILURE);
+//                 }
+//     }
+//     else if (game->map[y][x] == 'P')
+//     {
+//         if (mlx_image_to_window(game->mlx, game->images.player, x * TILESIZE, y * TILESIZE) < 0)
+//                 {
+//                     print_error("Failed to put player image to window");
+//                     return (FAILURE);
+//                 }
+//     }
+//     else if (game->map[y][x] == 'E')
+//     {
+//         if (mlx_image_to_window(game->mlx, game->images.exit, x * TILESIZE, y * TILESIZE) < 0)
+//                 {
+//                     print_error("Failed to put exit image to window");
+//                     return (FAILURE);
+//                 }
+//     }
+//     return (1);
+// }
+
+static int draw_collectables(t_game *game, size_t y, size_t x)
 {
-    if (game->map[y][x] == '1')
+    static int  i = 0;
+
+    if (i % 3 == 0)
+        mlx_image_to_window(game->mlx, game->images.fruit1, x * TILESIZE, y * TILESIZE);
+    else if (i % 5 == 0)
+        mlx_image_to_window(game->mlx, game->images.fruit2, x * TILESIZE, y * TILESIZE);
+    else
+        mlx_image_to_window(game->mlx, game->images.fruit3, x * TILESIZE, y * TILESIZE);
+    i++;
+    if (mlx_image_to_window < 0)
     {
-        if (mlx_image_to_window(game->mlx, game->images.wall, x * TILESIZE, y * TILESIZE) < 0)
-                {
-                    print_error("Failed to put wall image to window");
-                    return (FAILURE);
-                }
+        print_error("Failed to put collectable image to window");
+        return (FAILURE);
     }
-    if (game->map[y][x] == 'C')
+    return (1);
+}
+
+static int draw_walls(t_game *game, size_t y, size_t x)
+{
+    mlx_image_to_window(game->mlx, game->images.wall, x * TILESIZE, y * TILESIZE);
+    if (mlx_image_to_window < 0)
     {
-        if (mlx_image_to_window(game->mlx, game->images.collectable, x * TILESIZE, y * TILESIZE) < 0)
-                {
-                    print_error("Failed to put collectable image to window");
-                    return (FAILURE);
-                }
+        print_error("Failed to put wall image to window");
+        return (FAILURE);
     }
-    else if (game->map[y][x] == 'P')
+    return (1);
+}
+
+static int draw_player(t_game *game, size_t y, size_t x)
+{
+    mlx_image_to_window(game->mlx, game->images.player, x * TILESIZE, y * TILESIZE);
+    if (mlx_image_to_window < 0)
     {
-        if (mlx_image_to_window(game->mlx, game->images.player, x * TILESIZE, y * TILESIZE) < 0)
-                {
-                    print_error("Failed to put player image to window");
-                    return (FAILURE);
-                }
+        print_error("Failed to put player image to window");
+        return (FAILURE);
     }
-    else if (game->map[y][x] == 'E')
+    return (1);
+}
+
+static int draw_exit(t_game *game, size_t y, size_t x)
+{
+    mlx_image_to_window(game->mlx, game->images.exit, x * TILESIZE, y * TILESIZE);
+    if (mlx_image_to_window < 0)
     {
-        if (mlx_image_to_window(game->mlx, game->images.exit, x * TILESIZE, y * TILESIZE) < 0)
-                {
-                    print_error("Failed to put exit image to window");
-                    return (FAILURE);
-                }
+        print_error("Failed to put exit image to window");
+        return (FAILURE);
     }
     return (1);
 }
@@ -155,7 +211,15 @@ int render_map(t_game *game)
         x = 0;
         while (x < game->map_width)
         {
-            draw_images(game, y, x);
+            if (game->map[y][x] == '1')
+                draw_walls(game, y, x);
+            else if (game->map[y][x] == 'P')
+                draw_player(game, y, x);
+            else if (game->map[y][x] == 'C')
+                draw_collectables(game, y, x);
+            else if (game->map[y][x] == 'E')
+                draw_exit(game, y, x);
+            // draw_images(game, y, x);
             x++;
         }
         y++;
