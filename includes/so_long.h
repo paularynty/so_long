@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/25 21:03:49 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/26 16:00:13 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ typedef struct  s_position
 
 typedef struct	s_game
 {
+    t_position  position;
+    
     char        *file;
 
     void        *mlx_ptr;
@@ -77,8 +79,6 @@ typedef struct	s_game
     mlx_t       *mlx;
 
     t_images    images;
-
-    t_position  position;
 
     int         player_x;
     int         player_y;
@@ -126,7 +126,6 @@ void        print_error(char *message);
 int         init_mlx(t_game *game, int width, int height);
 int         init_game(t_game *game);
 mlx_image_t *load_image(mlx_t *mlx, const char *imgfile);
-int         fill_background(t_game *game);
 int         draw_images(t_game *game, size_t y, size_t x);
 int         render_map(t_game *game);
 

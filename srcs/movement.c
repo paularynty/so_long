@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 12:34:09 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/24 18:49:15 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/26 15:54:23 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void    key_hooks(mlx_key_data_t keydata, void *param)
     game = (t_game *)param;
     x = game->player_x;
     y = game->player_y;
-    if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+    if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
         mlx_close_window(game->mlx);
     else if (keydata.key == MLX_KEY_UP && keydata.action == MLX_PRESS)
         move_player(game, x, y - 1);
