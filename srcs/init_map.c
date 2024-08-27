@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/25 18:26:38 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/25 18:39:42 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,12 @@ t_game *init_map(char *map)
     }
     player_start = (t_position){game->player_x, game->player_y};
 	if (!validate_path(game, player_start))
+    {
         print_error("No valid path available");
+        free(map_as_str);
+        free_game(game);
+        return (0);
+    }
 	free(map_as_str);
 	return (game);
 }
