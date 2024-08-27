@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 12:34:09 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/27 15:16:45 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/27 15:37:59 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,24 @@ static void collect_item(t_game *game, int x, int y)
     size_t  i;
 
     i = 0;
-    game->score++;
-    while (i < game->images.collectable->count)
+    while (i < game->images.collectable[0]->count)
     {
-        if (game->images.collectable->instances[i].x == x * TILESIZE
-            && game->images.collectable->instances[i].y == y * TILESIZE)
+        if (game->images.collectable[0]->instances[i].x == x * TILESIZE
+            && game->images.collectable[0]->instances[i].y == y * TILESIZE)
             {
-                game->images.collectable->instances[i].enabled = false;
+                game->images.collectable[0]->instances[i].enabled = false;
+                break ;
+            }
+        else if (game->images.collectable[1]->instances[i].x == x * TILESIZE
+            && game->images.collectable[1]->instances[i].y == y * TILESIZE)
+            {
+                game->images.collectable[1]->instances[i].enabled = false;
+                break ;
+            }
+        else if (game->images.collectable[2]->instances[i].x == x * TILESIZE
+            && game->images.collectable[2]->instances[i].y == y * TILESIZE)
+            {
+                game->images.collectable[2]->instances[i].enabled = false;
                 break ;
             }
             i++;
@@ -66,6 +77,7 @@ static void move_player(t_game *game, int x, int y)
     {
         update_movement(game, x, y);
         collect_item(game, x, y);
+        game->score++;
         ft_printf("🍓 Collected a fruit!\n");
         print_collectables(game);
     }
