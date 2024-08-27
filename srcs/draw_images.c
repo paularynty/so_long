@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 11:13:19 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/26 15:59:43 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/27 15:33:47 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static int draw_collectables(t_game *game, size_t y, size_t x)
     static int  i = 0;
 
     if (i % 3 == 0)
-        mlx_image_to_window(game->mlx, game->images.fruit1, x * TILESIZE, y * TILESIZE);
+        mlx_image_to_window(game->mlx, game->images.collectable[0], x * TILESIZE, y * TILESIZE);
     else if (i % 5 == 0)
-        mlx_image_to_window(game->mlx, game->images.fruit2, x * TILESIZE, y * TILESIZE);
+        mlx_image_to_window(game->mlx, game->images.collectable[1], x * TILESIZE, y * TILESIZE);
     else
-        mlx_image_to_window(game->mlx, game->images.fruit3, x * TILESIZE, y * TILESIZE);
+        mlx_image_to_window(game->mlx, game->images.collectable[2], x * TILESIZE, y * TILESIZE);
     i++;
     if (mlx_image_to_window < 0)
     {

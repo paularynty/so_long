@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:00:50 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/25 21:06:38 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/27 15:32:31 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void    string_to_screen(t_game *game)
 {
     game->images.moves = mlx_put_string(game->mlx, "Steps:", 24,
         game->map_height * TILESIZE - 26);
-    mlx_image_to_window(game->mlx, game->images.fruit3, 136,
+    mlx_image_to_window(game->mlx, game->images.collectable[0], 136,
         game->map_height * TILESIZE - 32);
     mlx_put_string(game->mlx, ":", 170, game->map_height * TILESIZE - 26);
     //here maybe just put_string without the fruit and instead display "Fruits:"

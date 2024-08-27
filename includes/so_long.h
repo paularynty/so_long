@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/26 16:00:13 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/27 15:31:09 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct  s_images
     mlx_image_t *fruit1;
     mlx_image_t *fruit2;
     mlx_image_t *fruit3;
-    mlx_image_t *collectable;
+    mlx_image_t *collectable[3];
     mlx_image_t *collectable_screen;
     mlx_image_t *wall;
     mlx_image_t *floor;

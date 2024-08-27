@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:29:55 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/26 16:00:09 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/27 15:31:40 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ int init_game_images(t_game *game)
 {   
     game->images.player = load_image(game->mlx, IMG_PLAYER);
     // game->images.collectable = load_image(game->mlx, IMG_COLL);
-    game->images.fruit1 = load_image(game->mlx, IMG_FRUIT1);
-    game->images.fruit2 = load_image(game->mlx, IMG_FRUIT2);
-    game->images.fruit3 = load_image(game->mlx, IMG_FRUIT3);
+    game->images.collectable[0] = load_image(game->mlx, IMG_FRUIT1);
+    game->images.collectable[1] = load_image(game->mlx, IMG_FRUIT2);
+    game->images.collectable[2] = load_image(game->mlx, IMG_FRUIT3);
     game->images.wall = load_image(game->mlx, IMG_WALL);
     game->images.floor = load_image(game->mlx, IMG_FLOOR);
     game->images.exit = load_image(game->mlx, IMG_EXIT);
-    if (!game->images.player || !game->images.fruit1 || !game->images.fruit2
-        || !game->images.fruit3 || !game->images.wall || !game->images.floor
+    if (!game->images.player || !game->images.collectable[0] || !game->images.collectable[1]
+        || !game->images.collectable[2] || !game->images.wall || !game->images.floor
         || !game->images.exit)
     // if (!game->images.player || !game->images.collectable 
     // || !game->images.wall || !game->images.floor || !game->images.exit)
