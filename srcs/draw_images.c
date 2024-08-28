@@ -18,7 +18,7 @@ static int draw_collectables(t_game *game, size_t y, size_t x)
 
     if (i % 3 == 0)
         mlx_image_to_window(game->mlx, game->images.collectable[0], x * TILESIZE, y * TILESIZE);
-    else if (i % 5 == 0)
+    else if (i % 4 == 0)
         mlx_image_to_window(game->mlx, game->images.collectable[1], x * TILESIZE, y * TILESIZE);
     else
         mlx_image_to_window(game->mlx, game->images.collectable[2], x * TILESIZE, y * TILESIZE);

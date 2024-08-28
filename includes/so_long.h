@@ -35,7 +35,7 @@
 # define IMG_FRUIT3 "textures/strawberry.png"
 # define IMG_FLOOR "textures/floor.png"
 # define IMG_WALL "textures/wall.png"
-# define IMG_EXIT "textures/exit.png"
+# define IMG_EXIT "textures/basket.png"
 
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
@@ -45,6 +45,7 @@
 typedef struct  s_images
 {
     mlx_image_t *player;
+    mlx_image_t *enemy;
     mlx_image_t *fruit1;
     mlx_image_t *fruit2;
     mlx_image_t *fruit3;
@@ -88,6 +89,7 @@ typedef struct	s_game
     int         exit_y;
 
     int         player;
+    int         enemies;
     int         exit;
     int         collectables;
 
@@ -138,4 +140,8 @@ void        end_game(t_game *game, mlx_t *mlx);
 
 //movement.c
 void        key_hooks(mlx_key_data_t keydata, void *param);
+
+//enemy.c
+void	    animate_enemy(t_game *game);
+
 #endif

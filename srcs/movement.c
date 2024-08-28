@@ -55,7 +55,7 @@ static int  validate_exit(t_game *game, int x, int y)
     {
         if (game->score != game->collectables)
         {
-            ft_printf("Collect all fruits before exiting the game 🍓\n");
+            ft_printf("Collect all fruits before dropping them into the basket 🧺\n");
             return (FAILURE);
         }
         else
@@ -86,6 +86,7 @@ static void move_player(t_game *game, int x, int y)
     game->player_x = x;
     game->player_y = y;
     game->steps++;
+    // animate_enemy(game);
     print_moves(game);
     ft_printf("🥝 Steps: %d\n", game->steps);
 }
@@ -101,12 +102,16 @@ void    key_hooks(mlx_key_data_t keydata, void *param)
     y = game->player_y;
     if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
         mlx_close_window(game->mlx);
-    else if (keydata.key == MLX_KEY_UP && keydata.action == MLX_PRESS)
+    else if ((keydata.key == MLX_KEY_UP && keydata.action == MLX_PRESS) 
+        || (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS))
         move_player(game, x, y - 1);
-    else if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_PRESS)
+    else if ((keydata.key == MLX_KEY_DOWN && keydata.action == MLX_PRESS) 
+        || (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS))
         move_player(game, x, y + 1);
-    else if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
+    else if ((keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
+        || (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS))
         move_player(game, x - 1, y);
-    else if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
+    else if ((keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
+        || (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS))
         move_player(game, x + 1, y);
 }

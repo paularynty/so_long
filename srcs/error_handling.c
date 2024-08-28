@@ -14,8 +14,6 @@
 
 void    clean_game(t_game *game)
 {
-    size_t  i;
-
     if (game->mlx)
     {
         if (game->images.wall)
@@ -35,14 +33,8 @@ void    clean_game(t_game *game)
         mlx_terminate(game->mlx);
         game->mlx = NULL;
     }
-    i = 0;
     if (game->map)
-    {
-        while (game->map[i])
-            free(game->map[i++]);
-        free(game->map);
-        game->map = NULL;
-    }
+        free_game(game);
 }
 
 void free_game(t_game *game)
@@ -52,12 +44,13 @@ void free_game(t_game *game)
     i = 0;
     if (!game)
         return ;
-    while (game->map[i] != NULL)
+    if (game->map)
     {
-        free(game->map[i]);
-        i++;
+        while (game->map[i])
+            free(game->map[i++]);
+        free(game->map);
+        game->map = NULL;
     }
-    free(game->map);
     free(game);
 }
 

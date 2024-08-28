@@ -14,11 +14,16 @@
 
 void    string_to_screen(t_game *game)
 {
+    char    *str;
+
     game->images.moves = mlx_put_string(game->mlx, "Steps:", 24,
         game->map_height * TILESIZE - 26);
     mlx_image_to_window(game->mlx, game->images.collectable[0], 136,
         game->map_height * TILESIZE - 32);
     mlx_put_string(game->mlx, ":", 170, game->map_height * TILESIZE - 26);
+    mlx_put_string(game->mlx, "/", 216, game->map_height * TILESIZE - 26);
+    str = ft_itoa(game->collectables);
+    mlx_put_string(game->mlx, str, 232, game->map_height * TILESIZE - 26);
     //here maybe just put_string without the fruit and instead display "Fruits:"
 }
 
