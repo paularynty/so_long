@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/27 15:31:09 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/28 20:44:04 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@
 # define SUCCESS 0
 # define FAILURE -1
 
-# define IMG_PLAYER "textures/player.png"
-// # define IMG_COLL "textures/strawberry.png"
-# define IMG_FRUIT1 "textures/kiwi.png"
-# define IMG_FRUIT2 "textures/orange.png"
-# define IMG_FRUIT3 "textures/strawberry.png"
-# define IMG_FLOOR "textures/floor.png"
-# define IMG_WALL "textures/wall.png"
+# define IMG_ENEMY "textures/enemy.png"
 # define IMG_EXIT "textures/basket.png"
+# define IMG_FLOOR "textures/floor.png"
+# define IMG_COLL1 "textures/kiwi.png"
+# define IMG_COLL2 "textures/orange.png"
+# define IMG_COLL3 "textures/strawberry.png"
+# define IMG_PLAYER "textures/player.png"
+# define IMG_WALL "textures/wall1.png"
 
 # include "../libft/libft.h"
-# include "../MLX42/include/MLX42/MLX42.h"
+# include "./MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
 # include <stdlib.h>
 
@@ -67,32 +67,17 @@ typedef struct  s_position
 typedef struct	s_game
 {
     t_position  position;
+    t_images    images;
+    mlx_t       *mlx;
     
-    char        *file;
-
-    void        *mlx_ptr;
-    void        *window_ptr;
-    
+    char        **map;
     int         map_width;
     int         map_height;
-    char        **map;
-
-    mlx_t       *mlx;
-
-    t_images    images;
-
+    
     int         player_x;
     int         player_y;
-    int         player_dir;
 
-    int         exit_x;
-    int         exit_y;
-
-    int         player;
-    int         enemies;
-    int         exit;
     int         collectables;
-
     int         steps;
     int         score;
     int         won;
@@ -142,6 +127,6 @@ void        end_game(t_game *game, mlx_t *mlx);
 void        key_hooks(mlx_key_data_t keydata, void *param);
 
 //enemy.c
-void	    animate_enemy(t_game *game);
+// void	    animate_enemy(t_game *game);
 
 #endif

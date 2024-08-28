@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:29:55 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/27 15:54:37 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/28 20:05:16 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,19 @@ int init_mlx(t_game *game, int width, int height)
 }
 
 int init_game_images(t_game *game)
-{   
-    game->images.player = load_image(game->mlx, IMG_PLAYER);
-    // game->images.collectable = load_image(game->mlx, IMG_COLL);
-    game->images.collectable[0] = load_image(game->mlx, IMG_FRUIT1);
-    game->images.collectable[1] = load_image(game->mlx, IMG_FRUIT2);
-    game->images.collectable[2] = load_image(game->mlx, IMG_FRUIT3);
-    game->images.wall = load_image(game->mlx, IMG_WALL);
-    game->images.floor = load_image(game->mlx, IMG_FLOOR);
+{ 
+    game->images.enemy = load_image(game->mlx, IMG_ENEMY);
     game->images.exit = load_image(game->mlx, IMG_EXIT);
-    if (!game->images.player || !game->images.collectable[0] || !game->images.collectable[1]
-        || !game->images.collectable[2] || !game->images.wall || !game->images.floor
-        || !game->images.exit)
-    // if (!game->images.player || !game->images.collectable 
-    // || !game->images.wall || !game->images.floor || !game->images.exit)
+    game->images.collectable[0] = load_image(game->mlx, IMG_COLL1);
+    game->images.collectable[1] = load_image(game->mlx, IMG_COLL2);
+    game->images.collectable[2] = load_image(game->mlx, IMG_COLL3);
+    game->images.floor = load_image(game->mlx, IMG_FLOOR);
+    game->images.player = load_image(game->mlx, IMG_PLAYER);
+    game->images.wall = load_image(game->mlx, IMG_WALL);
+    if (!game->images.enemy || !game->images.player 
+        || !game->images.collectable[0] || !game->images.collectable[1]
+        || !game->images.collectable[2] || !game->images.wall 
+        || !game->images.floor || !game->images.exit)
         return (FAILURE);
     return (SUCCESS);
 }

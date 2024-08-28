@@ -6,7 +6,7 @@
 #    By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 12:05:04 by prynty            #+#    #+#              #
-#    Updated: 2024/08/26 11:15:37 by prynty           ###   ########.fr        #
+#    Updated: 2024/08/28 18:03:43 by prynty           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ NAME		= so_long
 CFLAGS		= -Wall -Wextra -Werror
 OSFLAGS		= -ldl -lglfw -pthread -lm
 LIBFT		= ./libft/libft.a
-MLXDIR		= ./MLX42
+MLXDIR		= ./includes/MLX42
 LIBMLX		= $(MLXDIR)/build/libmlx42.a
 
 FILES 		= main.c \

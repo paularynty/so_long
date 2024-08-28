@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 12:34:09 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/27 15:55:54 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/28 19:36:56 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void collect_item(t_game *game, int x, int y)
     size_t  i;
 
     i = 0;
-    while (i < game->images.collectable[0]->count)
+    while (i < game->images.collectable[2]->count)
     {
         if (game->images.collectable[0]->instances[i].x == x * TILESIZE
             && game->images.collectable[0]->instances[i].y == y * TILESIZE)

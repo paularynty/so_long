@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/25 18:39:42 by prynty           ###   ########.fr       */
+/*   Updated: 2024/08/28 19:43:38 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ t_game  *init_game_struct(char **grid)
 {
     t_game  *game;
 
-    game = malloc(sizeof(t_game));
-	// game = (t_game *)ft_calloc(1, sizeof(t_game));
+    game = (t_game *)malloc(sizeof(t_game));
     if (!game)
     {
         free_game(game);
@@ -74,6 +73,8 @@ t_game  *init_game_struct(char **grid)
     game->steps = 0;
     game->won = 0;
     game->score = 0;
+    game->images.collectable_screen = 0;
+    game->images.move_counter = 0;
     return (game);
 }
 
@@ -91,6 +92,7 @@ t_game *init_map(char *map)
         return (0);
     }
 	map_as_array = ft_split(map_as_str, '\n');
+    //check for NULL if split fails & free, as if you would with malloc
 	if (check_map_shape(map_as_array))
     {
         free(map_as_str);
