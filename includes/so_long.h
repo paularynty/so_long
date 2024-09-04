@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/04 11:22:54 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/04 18:50:32 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 # define RESET "\033[0m"
 
 # define TILESIZE 32
-# define MAX_BYTE 2014
-# define MAX_ROW 33
-# define MAX_COL 60
+# define MAX_BYTE 8107
+# define MAX_ROW 67
+# define MAX_COL 120
 
-# define SCREEN_WIDTH 3200
-# define SCREEN_HEIGHT 1800
+# define SCREEN_WIDTH 3840
+# define SCREEN_HEIGHT 2160
 
 # define SUCCESS 0
 # define FAILURE -1
@@ -93,14 +93,13 @@ int         check_args(int argc, char **argv);
 int         check_empty_lines(char *map);
 int         check_map_shape(char **grid);
 int         check_map_content(char *map);
-int         check_walls(t_game *game);
+int         check_walls(t_game *game, char **map);
 size_t      count_rows(char **grid);
 size_t	    count_collectables(t_game *game);
 
 //init_map.c
-char        *read_map(char *map);
+int         init_map(t_game *game, int32_t map_file);
 t_game      *init_game_struct(char **grid);
-t_game      *init_map(char *map);
 
 //validate_path.c
 size_t      player_position(t_game *game, char c);
@@ -110,6 +109,7 @@ int         validate_path(t_game *game, t_position position);
 void        clean_game(t_game *game);
 void        free_game(t_game *game);
 void        free_map(char **map, size_t height);
+void        free_array(char ***array);
 void        print_error(char *message);
 
 //init_game.c

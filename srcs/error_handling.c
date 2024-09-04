@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:30:57 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/27 15:30:36 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/04 18:20:04 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,22 @@ void    free_map(char **map, size_t height)
     free(map);
 }
 
+void    free_array(char ***array)
+{
+    int i;
+
+    i = 0;
+    if (*array)
+    {
+        while ((*array)[i] != NULL)
+            free((*array)[i++]);
+        free(*array);
+        *array = NULL;
+    }
+}
+
 void    print_error(char *message)
 {
     ft_printf(PINK"Error\n"GREY"%s\n"RESET, message);
+    exit(1);
 }

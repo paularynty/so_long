@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:23:39 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/28 20:43:43 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/04 18:50:21 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int    check_map_content(char *map)
     return (0);
 }
 
-int check_walls(t_game *game)
+int check_walls(t_game *game, char **map)
 {
 	size_t  i;
 	
