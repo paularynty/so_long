@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/28 19:43:38 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/04 11:28:33 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,34 +24,52 @@ size_t  count_rows(char **grid)
 
 char    *read_map(char *map)
 {
-    char    *line;
-    char    *temp;
-    char    *joined_line;
-    int     map_fd;
+    char        line[MAX_BYTE];
+    char        *temp;
+    char        *joined_line;
+    int32_t     map_fd;
+    int32_t     bytes_read;
+    t_game      *game;
 
-    map_fd = open(map, O_RDONLY);
-    if (map_fd < 0)
-    {
-        close(map_fd);
-        print_error("Failed to open map, verify that map file exists");
-        exit(1);
-    }
-    joined_line = ft_calloc(1, sizeof(char *));
-    if (!joined_line)
-        return (NULL);
-    line = get_next_line(map_fd);
-    while (line != NULL)
-    {
-        temp = joined_line;
-        joined_line = ft_strjoin(joined_line, line);
-        free(temp);
-        free(line);
-        if (!joined_line)
-            print_error("Memory allocation failed");
-        line = get_next_line(map_fd);
-    }
+    ft_bzero(line, MAX_BYTE);
+    bytes_read = read(map_fd, line, MAX_BYTE);
     close(map_fd);
-    return (joined_line);
+    if (bytes_read == -1)
+        print_error("Failed to read map");
+    else if (bytes_read == 0)
+        print_error("Empty map");
+    else if (bytes_read > MAX_ROW * (MAX_COL + 1))
+        print_error("Map is too large");
+    game->map = ft_split(line, '\n');
+    if (!game->map)
+        print_error("Split failed");
+    game->map_width = ft_strlen(grid[0]);
+    game->map_height = count_rows(grid);
+    
+    
+    // map_fd = open(map, O_RDONLY);
+    // if (map_fd < 0)
+    // {
+    //     close(map_fd);
+    //     print_error("Failed to open map, verify that map file exists");
+    //     exit(1);
+    // }
+    // joined_line = ft_calloc(1, sizeof(char *));
+    // if (!joined_line)
+    //     return (NULL);
+    // line = get_next_line(map_fd);
+    // while (line != NULL)
+    // {
+    //     temp = joined_line;
+    //     joined_line = ft_strjoin(joined_line, line);
+    //     free(temp);
+    //     free(line);
+    //     if (!joined_line)
+    //         print_error("Memory allocation failed");
+    //     line = get_next_line(map_fd);
+    // }
+    // close(map_fd);
+    // return (joined_line);
 }
 
 t_game  *init_game_struct(char **grid)

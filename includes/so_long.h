@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/28 20:44:04 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/04 11:22:54 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # define RESET "\033[0m"
 
 # define TILESIZE 32
+# define MAX_BYTE 2014
+# define MAX_ROW 33
+# define MAX_COL 60
 
 # define SCREEN_WIDTH 3200
 # define SCREEN_HEIGHT 1800
