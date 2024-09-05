@@ -6,51 +6,25 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 09:10:01 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 09:31:48 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-size_t  count_rows(char **grid)
+static size_t  count_rows(char **map)
 {
     size_t  y;
 
     y = 0;
-    while (grid[y])
+    while (map[y])
         y++;
     return (y);
-}   
-    // char        *temp;
-    // char        *joined_line;
-    
-    // map_fd = open(map, O_RDONLY);
-    // if (map_fd < 0)
-    // {
-    //     close(map_fd);
-    //     print_error("Failed to open map, verify that map file exists");
-    //     exit(1);
-    // }
-    // joined_line = ft_calloc(1, sizeof(char *));
-    // if (!joined_line)
-    //     return (NULL);
-    // line = get_next_line(map_fd);
-    // while (line != NULL)
-    // {
-    //     temp = joined_line;
-    //     joined_line = ft_strjoin(joined_line, line);
-    //     free(temp);
-    //     free(line);
-    //     if (!joined_line)
-    //         print_error("Memory allocation failed");
-    //     line = get_next_line(map_fd);
-    // }
-    // close(map_fd);
-    // return (joined_line);
+}
 
-t_game  *init_game_struct(char **map)
+static void init_game_struct(t_game *game, char **map)
 {
-    t_game  *game;
+    // t_game  *game;
 
     game = (t_game *)malloc(sizeof(t_game));
     if (!game)
@@ -58,18 +32,18 @@ t_game  *init_game_struct(char **map)
         free_game(game);
         map_error(NULL, "Memory allocation failed");
     }
-    game->map = map;
-    game->map_width = ft_strlen(map[0]);
-    game->map_height = count_rows(map);
+    // game->map = map;
+    // game->map_width = ft_strlen(map[0]);
+    // game->map_height = count_rows(map);
     game->collectables = count_collectables(game);
-    game->player_x = player_position(game, 'x');
-    game->player_y = player_position(game, 'y');
+    // game->player_x = player_position(game, 'x');
+    // game->player_y = player_position(game, 'y');
     game->steps = 0;
     game->won = 0;
     game->score = 0;
     game->images.collectable_screen = 0;
     game->images.move_counter = 0;
-    return (game);
+    // return (game);
 }
 
 static void    check_map(t_game *game)
@@ -80,7 +54,9 @@ static void    check_map(t_game *game)
 
 	check_map_shape(game, game->map);
 	check_walls(game, game->map);
-    game = init_game_struct(game->map);
+    // init_game_struct(game, game->map);
+    game->player_x = player_position(game, 'x');
+    game->player_y = player_position(game, 'y');
     player_start = (t_position){game->player_x, game->player_y};
 	if (!validate_path(game, player_start))
         map_error(game, "No valid path available");

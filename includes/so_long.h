@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 09:02:15 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 09:28:35 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 # define SO_LONG_H
 
 # define GREEN "\033[1;32m"
-# define RED "\033[1;31m"
 # define PINK "\e[1m\e[38;5;205m"
 # define GREY "\033[0;90m"
-# define CYAN "\033[1;96m"
 # define RESET "\033[0m"
 
 # define TILESIZE 32
@@ -94,12 +92,12 @@ int         check_empty_lines(char *map);
 int         check_map_shape(t_game *game, char **map);
 int         check_walls(t_game *game, char **map);
 int         check_map_content(char *map);
-size_t      count_rows(char **grid);
+// size_t      count_rows(char **grid);
 size_t	    count_collectables(t_game *game);
 
 //init_map.c
 int         init_map(t_game *game, int32_t map_file);
-t_game      *init_game_struct(char **map);
+// t_game      *init_game_struct(char **map);
 
 //validate_path.c
 size_t      player_position(t_game *game, char c);
