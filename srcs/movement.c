@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 12:34:09 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/28 19:36:56 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 11:16:02 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void update_movement(t_game *game, int x, int y)
 {
-    game->map[game->player_y][game->player_x] = '0';
-    game->map[y][x] = 'P';
-    game->images.player->instances[0].x = x * TILESIZE;
-    game->images.player->instances[0].y = y * TILESIZE;
+    game->map->grid[game->map->player_y][game->map->player_x] = '0';
+    game->map->grid[y][x] = 'P';
+    game->images->player->instances[0].x = x * TILESIZE;
+    game->images->player->instances[0].y = y * TILESIZE;
 }
 
 static void collect_item(t_game *game, int x, int y)
@@ -25,24 +25,24 @@ static void collect_item(t_game *game, int x, int y)
     size_t  i;
 
     i = 0;
-    while (i < game->images.collectable[2]->count)
+    while (i < game->images->collectable[2]->count)
     {
-        if (game->images.collectable[0]->instances[i].x == x * TILESIZE
-            && game->images.collectable[0]->instances[i].y == y * TILESIZE)
+        if (game->images->collectable[0]->instances[i].x == x * TILESIZE
+            && game->images->collectable[0]->instances[i].y == y * TILESIZE)
             {
-                game->images.collectable[0]->instances[i].enabled = false;
+                game->images->collectable[0]->instances[i].enabled = false;
                 break ;
             }
-        if (game->images.collectable[1]->instances[i].x == x * TILESIZE
-            && game->images.collectable[1]->instances[i].y == y * TILESIZE)
+        if (game->images->collectable[1]->instances[i].x == x * TILESIZE
+            && game->images->collectable[1]->instances[i].y == y * TILESIZE)
             {
-                game->images.collectable[1]->instances[i].enabled = false;
+                game->images->collectable[1]->instances[i].enabled = false;
                 break ;
             }
-        if (game->images.collectable[2]->instances[i].x == x * TILESIZE
-            && game->images.collectable[2]->instances[i].y == y * TILESIZE)
+        if (game->images->collectable[2]->instances[i].x == x * TILESIZE
+            && game->images->collectable[2]->instances[i].y == y * TILESIZE)
             {
-                game->images.collectable[2]->instances[i].enabled = false;
+                game->images->collectable[2]->instances[i].enabled = false;
                 break ;
             }
             i++;
@@ -51,9 +51,9 @@ static void collect_item(t_game *game, int x, int y)
 
 static int  validate_exit(t_game *game, int x, int y)
 {
-    if (game->map[y][x] == 'E')
+    if (game->map->grid[y][x] == 'E')
     {
-        if (game->score != game->collectables)
+        if (game->score != game->map->collectables)
         {
             ft_printf("Collect all fruits before dropping them into the basket 🧺\n");
             return (FAILURE);
@@ -69,11 +69,11 @@ static int  validate_exit(t_game *game, int x, int y)
 
 static void move_player(t_game *game, int x, int y)
 {
-    if (game->map[y][x] == '1')
+    if (game->map->grid[y][x] == '1')
         return ;
-    if (game->map[y][x] == '0')
+    if (game->map->grid[y][x] == '0')
         update_movement(game, x, y);
-    else if (game->map[y][x] == 'C')
+    else if (game->map->grid[y][x] == 'C')
     {
         update_movement(game, x, y);
         collect_item(game, x, y);
@@ -83,8 +83,8 @@ static void move_player(t_game *game, int x, int y)
     }
     if (validate_exit(game, x, y) == -1)
         return ;
-    game->player_x = x;
-    game->player_y = y;
+    game->map->player_x = x;
+    game->map->player_y = y;
     game->steps++;
     // animate_enemy(game);
     print_moves(game);
@@ -98,8 +98,8 @@ void    key_hooks(mlx_key_data_t keydata, void *param)
     int     y;
 
     game = (t_game *)param;
-    x = game->player_x;
-    y = game->player_y;
+    x = game->map->player_x;
+    y = game->map->player_y;
     if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
         mlx_close_window(game->mlx);
     else if ((keydata.key == MLX_KEY_UP && keydata.action == MLX_PRESS) 

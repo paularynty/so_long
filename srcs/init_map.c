@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 10:39:21 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 10:49:27 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,6 @@ static size_t  count_rows(char **map)
     return (y);
 }
 
-static void init_game_struct(t_game *game, char **map)
-{
-    // t_game  *game;
-
-    game = (t_game *)malloc(sizeof(t_game));
-    if (!game)
-    {
-        free_game(game);
-        map_error(NULL, "Memory allocation failed");
-    }
-    // game->map = map;
-    // game->map_width = ft_strlen(map[0]);
-    // game->map_height = count_rows(map);
-    game->collectables = count_collectables(game, game->map);
-    // game->player_x = player_position(game, 'x');
-    // game->player_y = player_position(game, 'y');
-    game->steps = 0;
-    game->won = 0;
-    game->score = 0;
-    game->images.collectable_screen = 0;
-    game->images.move_counter = 0;
-    // return (game);
-}
-
 static void    check_map(t_map *map)
 {
     int32_t     rows;
@@ -53,10 +29,11 @@ static void    check_map(t_map *map)
     t_position  player_start;
 
 	check_map_shape(map, map->grid);
-    init_game_struct(game, game->map);
+    // init_game_struct(game, game->map);
     check_walls(map, map->grid);
     map->player_x = player_position(map, 'x');
     map->player_y = player_position(map, 'y');
+    map->collectables = count_collectables(map, map->grid);
     player_start = (t_position){map->player_x, map->player_y};
 	if (!validate_path(map, player_start))
         map_error(map, "No valid path available");

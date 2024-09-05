@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:09:11 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 10:36:00 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 11:02:57 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ int	main(int argc, char **argv)
 	// 	return (FAILURE);
 	// // if (init_game(game) == -1)
 	// // 	return (FAILURE);
-	// // start_game();
-	// // string_to_screen(game);
-	// // mlx_key_hook(game->mlx, &key_hooks, game);
-	// // mlx_loop(game->mlx);
-	// // end_game(game, game->mlx);
+	start_game();
+	string_to_screen(&game);
+	mlx_key_hook(game.mlx, &key_hooks, &game);
+	mlx_loop(game.mlx);
+	end_game(&game, game.mlx);
 	return (0);
 }

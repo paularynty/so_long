@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:33:01 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 10:32:44 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 10:48:34 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,11 @@ static int	flood_fill(t_map *map, char **temp_map, t_position position)
 		return (0);
 	}
 	temp_map[position.y][position.x] = '1';
-	flood_fill(game, temp_map, (t_position){position.x + 1, position.y});
-	flood_fill(game, temp_map, (t_position){position.x - 1, position.y});
-	flood_fill(game, temp_map, (t_position){position.x, position.y + 1});
-	flood_fill(game, temp_map, (t_position){position.x, position.y - 1});
-	if (collectables == game->collectables && exit_found)
+	flood_fill(map, temp_map, (t_position){position.x + 1, position.y});
+	flood_fill(map, temp_map, (t_position){position.x - 1, position.y});
+	flood_fill(map, temp_map, (t_position){position.x, position.y + 1});
+	flood_fill(map, temp_map, (t_position){position.x, position.y - 1});
+	if (collectables == map->collectables && exit_found)
 		return (1);
 	return (0);
 }

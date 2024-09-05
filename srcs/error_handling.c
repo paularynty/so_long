@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:30:57 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 10:37:36 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 11:12:10 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,25 @@ void    clean_game(t_game *game)
 {
     if (game->mlx)
     {
-        if (game->images.wall)
-            mlx_delete_image(game->mlx, game->images.wall);
-        if (game->images.floor)
-            mlx_delete_image(game->mlx, game->images.floor);
-        if (game->images.collectable[0])
-            mlx_delete_image(game->mlx, game->images.collectable[0]);
-        if (game->images.collectable[0])
-            mlx_delete_image(game->mlx, game->images.collectable[1]);
-        if (game->images.collectable[0])
-            mlx_delete_image(game->mlx, game->images.collectable[2]);
-        if (game->images.exit)
-            mlx_delete_image(game->mlx, game->images.exit);
-        if (game->images.player)
-            mlx_delete_image(game->mlx, game->images.player);
+        if (game->images->wall)
+            mlx_delete_image(game->mlx, game->images->wall);
+        if (game->images->floor)
+            mlx_delete_image(game->mlx, game->images->floor);
+        if (game->images->collectable[0])
+            mlx_delete_image(game->mlx, game->images->collectable[0]);
+        if (game->images->collectable[1])
+            mlx_delete_image(game->mlx, game->images->collectable[1]);
+        if (game->images->collectable[2])
+            mlx_delete_image(game->mlx, game->images->collectable[2]);
+        if (game->images->exit)
+            mlx_delete_image(game->mlx, game->images->exit);
+        if (game->images->player)
+            mlx_delete_image(game->mlx, game->images->player);
         mlx_terminate(game->mlx);
         game->mlx = NULL;
     }
     if (game->map->grid)
-        free_game(game);
+        free_array(&game->map->grid);
 }
 
 void free_game(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 10:38:38 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 11:10:15 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,13 @@ typedef struct s_map
     int         map_height;
     int         player_x;
     int         player_y;
+    int         collectables;
 }   t_map;
 
 
 typedef struct	s_game
 {
-    t_images    images;
+    t_images    *images;
     t_map       *map;
     mlx_t       *mlx;
     
@@ -89,7 +90,7 @@ typedef struct	s_game
     // int         player_x;
     // int         player_y;
 
-    int         collectables;
+    // int         collectables;
     int         steps;
     int         score;
     int         won;
@@ -130,14 +131,14 @@ int         draw_images(t_game *game, size_t y, size_t x);
 int         render_map(t_game *game);
 
 // //game_text.c
-// void        start_game(void);
-// void        string_to_screen(t_game *game);
-// void        print_moves(t_game *game);
-// void        print_collectables(t_game *game);
-// void        end_game(t_game *game, mlx_t *mlx);
+void        start_game(void);
+void        string_to_screen(t_game *game);
+void        print_moves(t_game *game);
+void        print_collectables(t_game *game);
+void        end_game(t_game *game, mlx_t *mlx);
 
-// //movement.c
-// void        key_hooks(mlx_key_data_t keydata, void *param);
+//movement.c
+void        key_hooks(mlx_key_data_t keydata, void *param);
 
 //enemy.c
 // void	    animate_enemy(t_game *game);

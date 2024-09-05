@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:23:39 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 10:23:05 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 10:48:04 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ size_t	count_collectables(t_map *map, char **grid)
 		x = 0;
 		while (x < map->map_width)
 		{
-			if (map->map[y][x] == 'C')
+			if (map->grid[y][x] == 'C')
 			{
 				collectables++;
 			}

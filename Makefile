@@ -6,7 +6,7 @@
 #    By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 12:05:04 by prynty            #+#    #+#              #
-#    Updated: 2024/09/05 10:27:56 by prynty           ###   ########.fr        #
+#    Updated: 2024/09/05 10:51:06 by prynty           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,9 +55,9 @@ FILES 		= main.c \
 			init_map.c \
 			check_map.c \
 			validate_path.c \
-			#draw_images.c \
+			draw_images.c \
 			game_text.c \
-			movement.c \#
+			movement.c \
 
 SRCS		= $(addprefix srcs/, $(FILES))
 OBJS		= $(addprefix objs/, $(FILES:.c=.o))
