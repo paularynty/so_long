@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_images.c                                      :+:      :+:    :+:   */
+/*   game_images.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 11:13:19 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/28 19:38:20 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 19:32:46 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,7 @@
 
 static int draw_collectables(t_game *game, size_t y, size_t x)
 {
-    static int  i = 0;
-
-    if (i % 3 == 0)
-        mlx_image_to_window(game->mlx, game->images.collectable[0], x * TILESIZE, y * TILESIZE);
-    else if (i % 4 == 0)
-        mlx_image_to_window(game->mlx, game->images.collectable[1], x * TILESIZE, y * TILESIZE);
-    else
-        mlx_image_to_window(game->mlx, game->images.collectable[2], x * TILESIZE, y * TILESIZE);
-    i++;
+    mlx_image_to_window(game->mlx, game->images.collectable, x * PIXELS, y * PIXELS);
     if (mlx_image_to_window < 0)
     {
         print_error("Failed to put collectable image to window");
@@ -31,20 +23,9 @@ static int draw_collectables(t_game *game, size_t y, size_t x)
     return (1);
 }
 
-// static int draw_collectables(t_game *game, size_t y, size_t x)
-// {
-//     mlx_image_to_window(game->mlx, game->images.collectable, x * TILESIZE, y * TILESIZE);
-//     if (mlx_image_to_window < 0)
-//     {
-//         print_error("Failed to put collectable image to window");
-//         return (FAILURE);
-//     }
-//     return (1);
-// }
-
 static int draw_walls(t_game *game, size_t y, size_t x)
 {
-    mlx_image_to_window(game->mlx, game->images.wall, x * TILESIZE, y * TILESIZE);
+    mlx_image_to_window(game->mlx, game->images.wall, x * PIXELS, y * PIXELS);
     if (mlx_image_to_window < 0)
     {
         print_error("Failed to put wall image to window");
@@ -55,7 +36,7 @@ static int draw_walls(t_game *game, size_t y, size_t x)
 
 static int draw_player(t_game *game, size_t y, size_t x)
 {
-    mlx_image_to_window(game->mlx, game->images.player, x * TILESIZE, y * TILESIZE);
+    mlx_image_to_window(game->mlx, game->images.player, x * PIXELS, y * PIXELS);
     if (mlx_image_to_window < 0)
     {
         print_error("Failed to put player image to window");
@@ -66,7 +47,7 @@ static int draw_player(t_game *game, size_t y, size_t x)
 
 static int draw_exit(t_game *game, size_t y, size_t x)
 {
-    mlx_image_to_window(game->mlx, game->images.exit, x * TILESIZE, y * TILESIZE);
+    mlx_image_to_window(game->mlx, game->images.exit, x * PIXELS, y * PIXELS);
     if (mlx_image_to_window < 0)
     {
         print_error("Failed to put exit image to window");

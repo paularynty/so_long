@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_game.c                                        :+:      :+:    :+:   */
+/*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:29:55 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/28 20:05:16 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 19:34:16 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int init_mlx(t_game *game, int width, int height)
 {
     mlx_t   *mlx;
 
-    mlx = mlx_init(width, height, "Baby Dragon's Lunchtime", true);
+    mlx = mlx_init(width, height, "Lunchtime with Dragon", true);
     if (!mlx)
     {
         free_map(game->map, game->map_height);
@@ -53,15 +53,12 @@ int init_game_images(t_game *game)
 { 
     game->images.enemy = load_image(game->mlx, IMG_ENEMY);
     game->images.exit = load_image(game->mlx, IMG_EXIT);
-    game->images.collectable[0] = load_image(game->mlx, IMG_COLL1);
-    game->images.collectable[1] = load_image(game->mlx, IMG_COLL2);
-    game->images.collectable[2] = load_image(game->mlx, IMG_COLL3);
+    game->images.collectable = load_image(game->mlx, IMG_COLLECTABLE);
     game->images.floor = load_image(game->mlx, IMG_FLOOR);
     game->images.player = load_image(game->mlx, IMG_PLAYER);
     game->images.wall = load_image(game->mlx, IMG_WALL);
     if (!game->images.enemy || !game->images.player 
-        || !game->images.collectable[0] || !game->images.collectable[1]
-        || !game->images.collectable[2] || !game->images.wall 
+        || !game->images.collectable || !game->images.wall 
         || !game->images.floor || !game->images.exit)
         return (FAILURE);
     return (SUCCESS);
@@ -79,7 +76,7 @@ static int render_background(t_game *game)
         x = 0;
         while (x < game->map_width)
         {
-            if (mlx_image_to_window(game->mlx, game->images.floor, x * TILESIZE, y * TILESIZE) < 0)
+            if (mlx_image_to_window(game->mlx, game->images.floor, x * PIXELS, y * PIXELS) < 0)
                 {
                     print_error("Failed to put floor image to window");
                     return (FAILURE);
@@ -96,8 +93,8 @@ int init_game(t_game *game)
     int     width;
     int     height;
 
-    width = game->map_width * TILESIZE;
-    height = game->map_height * TILESIZE;
+    width = game->map_width * PIXELS;
+    height = game->map_height * PIXELS;
     if (!init_mlx(game, width, height))
         return (FAILURE);
     mlx_set_setting(MLX_STRETCH_IMAGE, 1);
