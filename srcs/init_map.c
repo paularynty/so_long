@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/28 19:43:38 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 17:28:14 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,37 +22,54 @@ size_t  count_rows(char **grid)
     return (y);
 }
 
-char    *read_map(char *map)
+char    *read_map(char *map, int32_t map_fd)
 {
-    char    *line;
-    char    *temp;
-    char    *joined_line;
-    int     map_fd;
-
-    map_fd = open(map, O_RDONLY);
-    if (map_fd < 0)
-    {
-        close(map_fd);
-        print_error("Failed to open map, verify that map file exists");
-        exit(1);
-    }
-    joined_line = ft_calloc(1, sizeof(char *));
-    if (!joined_line)
-        return (NULL);
-    line = get_next_line(map_fd);
-    while (line != NULL)
-    {
-        temp = joined_line;
-        joined_line = ft_strjoin(joined_line, line);
-        free(temp);
-        free(line);
-        if (!joined_line)
-            print_error("Memory allocation failed");
-        line = get_next_line(map_fd);
-    }
+    char        map_as_str[MAX_BYTE];
+    int32_t     bytes_read;
+    
+    ft_bzero(map_as_str, MAX_BYTE);
+    bytes_read = read(map_fd, map_as_str, MAX_BYTE);
     close(map_fd);
-    return (joined_line);
+    if (bytes_read == -1)
+        print_error("Failed to read map");
+    else if (bytes_read == 0)
+        print_error("Empty map");
+    else if (bytes_read > MAX_ROW * (MAX_COL + 1))
+        print_error("Map is too large");
+    if (check_empty_lines(map_as_str) || check_map_content(map_as_str))
+        print_error("Lmao idk");
+    return (map_as_str);
 }
+// {
+//     char    *line;
+//     char    *temp;
+//     char    *joined_line;
+//     int     map_fd;
+
+//     map_fd = open(map, O_RDONLY);
+//     if (map_fd < 0)
+//     {
+//         close(map_fd);
+//         print_error("Failed to open map, verify that map file exists");
+//         exit(1);
+//     }
+//     joined_line = ft_calloc(1, sizeof(char *));
+//     if (!joined_line)
+//         return (NULL);
+//     line = get_next_line(map_fd);
+//     while (line != NULL)
+//     {
+//         temp = joined_line;
+//         joined_line = ft_strjoin(joined_line, line);
+//         free(temp);
+//         free(line);
+//         if (!joined_line)
+//             print_error("Memory allocation failed");
+//         line = get_next_line(map_fd);
+//     }
+//     close(map_fd);
+//     return (joined_line);
+// }
 
 t_game  *init_game_struct(char **grid)
 {
@@ -78,14 +95,14 @@ t_game  *init_game_struct(char **grid)
     return (game);
 }
 
-t_game *init_map(char *map)
+t_game *init_map(char *map, int32_t map_fd)
 {
     t_game      *game;
 	char	    *map_as_str;
 	char	    **map_as_array;
     t_position  player_start;
 
-    map_as_str = read_map(map);
+    map_as_str = read_map(map, map_fd);
 	if (check_empty_lines(map_as_str) || check_map_content(map_as_str))
     {
         free(map_as_str);

@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/28 20:44:04 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 17:27:23 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 # define SO_LONG_H
 
 # define GREEN "\033[1;32m"
-# define RED "\033[1;31m"
 # define PINK "\e[1m\e[38;5;205m"
 # define GREY "\033[0;90m"
-# define CYAN "\033[1;96m"
 # define RESET "\033[0m"
 
-# define TILESIZE 32
+# define SCREEN_WIDTH 3840
+# define SCREEN_HEIGHT 2160
 
-# define SCREEN_WIDTH 3200
-# define SCREEN_HEIGHT 1800
+# define TILESIZE 32
+# define MAX_BYTE 8107
+# define MAX_ROW 67
+# define MAX_COL 120
 
 # define SUCCESS 0
 # define FAILURE -1
@@ -95,9 +96,9 @@ size_t      count_rows(char **grid);
 size_t	    count_collectables(t_game *game);
 
 //init_map.c
-char        *read_map(char *map);
+char        *read_map(char *map, int32_t map_fd);
 t_game      *init_game_struct(char **grid);
-t_game      *init_map(char *map);
+t_game      *init_map(char *map, int32_t map_fd);
 
 //validate_path.c
 size_t      player_position(t_game *game, char c);
