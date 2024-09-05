@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 17:27:23 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 18:23:19 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@
 # define IMG_ENEMY "textures/enemy.png"
 # define IMG_EXIT "textures/basket.png"
 # define IMG_FLOOR "textures/floor.png"
-# define IMG_COLL1 "textures/kiwi.png"
-# define IMG_COLL2 "textures/orange.png"
-# define IMG_COLL3 "textures/strawberry.png"
+# define IMG_COLLECTIBLE "textures/strawberry.png"
 # define IMG_PLAYER "textures/player.png"
 # define IMG_WALL "textures/wall1.png"
 
@@ -50,7 +48,7 @@ typedef struct  s_images
     mlx_image_t *fruit1;
     mlx_image_t *fruit2;
     mlx_image_t *fruit3;
-    mlx_image_t *collectable[3];
+    mlx_image_t *collectable;
     mlx_image_t *collectable_screen;
     mlx_image_t *wall;
     mlx_image_t *floor;
@@ -96,9 +94,9 @@ size_t      count_rows(char **grid);
 size_t	    count_collectables(t_game *game);
 
 //init_map.c
-char        *read_map(char *map, int32_t map_fd);
+// char        *read_map(char *map, int32_t map_fd);
 t_game      *init_game_struct(char **grid);
-t_game      *init_map(char *map, int32_t map_fd);
+t_game      *init_map(char *map, int32_t map_file);
 
 //validate_path.c
 size_t      player_position(t_game *game, char c);

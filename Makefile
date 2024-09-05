@@ -6,7 +6,7 @@
 #    By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 12:05:04 by prynty            #+#    #+#              #
-#    Updated: 2024/08/28 18:03:43 by prynty           ###   ########.fr        #
+#    Updated: 2024/09/05 18:24:40 by prynty           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,6 @@ MLXDIR		= ./includes/MLX42
 LIBMLX		= $(MLXDIR)/build/libmlx42.a
 
 FILES 		= main.c \
-			check_args.c \
 			draw_images.c \
 			error_handling.c \
 			init_game.c \

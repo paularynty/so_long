@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:23:39 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/28 20:43:43 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 18:27:56 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int check_empty_lines(char *map)
     }
 	while (map[i])
 	{
-		if (map[0] == '\n' || (map[i] == '\n' && (map[i + 1]) == '\n'))
+		if (map[0] == '\n' || (map[i] == '\n' && (map[i + 1]) == '\n')
+            || (map[i] == '\n' && (map[i + 1] == '\0')))
         {
 			print_error("Map contains empty lines");
             return (1);

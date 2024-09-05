@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 12:34:09 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 10:45:38 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 18:25:23 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,15 @@ static void collect_item(t_game *game, int x, int y)
     size_t  i;
 
     i = 0;
-    while (i < game->images.collectable[2]->count)
+    while (i < game->collectables)
     {
-        if (game->images.collectable[0]->instances[i].x == x * TILESIZE
-            && game->images.collectable[0]->instances[i].y == y * TILESIZE)
+        if (game->images.collectable->instances[i].x == x * TILESIZE
+            && game->images.collectable->instances[i].y == y * TILESIZE)
             {
-                game->images.collectable[0]->instances[i].enabled = false;
+                game->images.collectable->instances[i].enabled = false;
                 break ;
             }
-        if (game->images.collectable[1]->instances[i].x == x * TILESIZE
-            && game->images.collectable[1]->instances[i].y == y * TILESIZE)
-            {
-                game->images.collectable[1]->instances[i].enabled = false;
-                break ;
-            }
-        if (game->images.collectable[2]->instances[i].x == x * TILESIZE
-            && game->images.collectable[2]->instances[i].y == y * TILESIZE)
-            {
-                game->images.collectable[2]->instances[i].enabled = false;
-                break ;
-            }
-            i++;
+        i++;
     }
 }
 
@@ -86,7 +74,6 @@ static void move_player(t_game *game, int x, int y)
     game->player_x = x;
     game->player_y = y;
     game->steps++;
-    // animate_enemy(game);
     print_moves(game);
     ft_printf("🥝 Steps: %d\n", game->steps);
 }

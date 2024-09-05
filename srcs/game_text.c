@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:00:50 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/28 19:45:54 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 18:11:13 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ void    string_to_screen(t_game *game)
 
     game->images.moves = mlx_put_string(game->mlx, "Steps:", 24,
         game->map_height * TILESIZE - 26);
-    mlx_image_to_window(game->mlx, game->images.collectable[0], 136,
-        game->map_height * TILESIZE - 32);
-    mlx_put_string(game->mlx, ":", 170, game->map_height * TILESIZE - 26);
+    mlx_put_string(game->mlx, "Fruits:", 136, game->map_height * TILESIZE - 26);
     mlx_put_string(game->mlx, "/", 216, game->map_height * TILESIZE - 26);
     str = ft_itoa(game->collectables);
     mlx_put_string(game->mlx, str, 232, game->map_height * TILESIZE - 26);

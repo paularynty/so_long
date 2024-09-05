@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:29:55 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/28 20:05:16 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 18:13:27 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,12 @@ int init_game_images(t_game *game)
 { 
     game->images.enemy = load_image(game->mlx, IMG_ENEMY);
     game->images.exit = load_image(game->mlx, IMG_EXIT);
-    game->images.collectable[0] = load_image(game->mlx, IMG_COLL1);
-    game->images.collectable[1] = load_image(game->mlx, IMG_COLL2);
-    game->images.collectable[2] = load_image(game->mlx, IMG_COLL3);
+    game->images.collectable = load_image(game->mlx, IMG_COLLECTIBLE);
     game->images.floor = load_image(game->mlx, IMG_FLOOR);
     game->images.player = load_image(game->mlx, IMG_PLAYER);
     game->images.wall = load_image(game->mlx, IMG_WALL);
     if (!game->images.enemy || !game->images.player 
-        || !game->images.collectable[0] || !game->images.collectable[1]
-        || !game->images.collectable[2] || !game->images.wall 
+        || !game->images.collectable || !game->images.wall 
         || !game->images.floor || !game->images.exit)
         return (FAILURE);
     return (SUCCESS);
