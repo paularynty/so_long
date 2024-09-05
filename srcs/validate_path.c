@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:33:01 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/25 18:25:49 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 09:00:20 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,10 @@ int	validate_path(t_game *game, t_position position)
 
 	temp = create_temp_map(game);
 	if (!temp)
+    {
+        free(temp);
 		print_error("Memory allocation failed");
+    }
 	result = flood_fill(game, temp, position);
 	i = 0;
 	while (i < game->map_height)

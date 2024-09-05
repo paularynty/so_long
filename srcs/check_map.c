@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:23:39 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/04 18:50:21 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 08:56:31 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,16 @@ int check_empty_lines(char *map)
     return (0);
 }
 
-int check_map_shape(char **grid)
+int check_map_shape(t_game *game, char **map)
 {
 	size_t	i;
 	size_t	len;
 
 	i = 0;
-	len = ft_strlen(grid[i]);
-	while (grid[i])
+	while (map[i])
 	{
-		if (ft_strlen(grid[i]) != len)
-        {
-			print_error("Map is not rectangular");
-            return (1);
-        }
+		if (ft_strlen(map[i]) != game->map_width)
+            map_error(game, "Map is not rectangular");
 		i++;
 	}
     return (0);
@@ -129,35 +125,18 @@ int check_walls(t_game *game, char **map)
     while (i < game->map_width)
     {
         if (game->map[0][i] != '1')
-        {
-            print_error("The map is not surrounded by walls (top row)");
-            return (1);
-        }
-        i++;
-    }
-    i = 0;
-    while (i < game->map_width)
-    {
+            map_error(game, "The map is not surrounded by walls (top row)");
         if (game->map[game->map_height - 1][i] != '1')
-        {
-            print_error("The map is not surrounded by walls (bottom row)");
-            return (1);
-        }
+            map_error(game, "The map is not surrounded by walls (bottom row)");
         i++;
     }
     i = 0;
     while (i < game->map_height)
     {
         if (game->map[i][0] != '1')
-        {
-            print_error("The map is not surrounded by walls (left column)");
-            return (1);
-        }
+            map_error(game, "The map is not surrounded by walls (left column)");
         if (game->map[i][game->map_width - 1] != '1')
-        {
-            print_error("The map is not surrounded by walls (right column)");
-            return (1);
-        }
+            map_error(game, "The map is not surrounded by walls (right column)");
         i++;
     }
     return (0);

@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/04 18:50:32 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 09:02:15 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,15 @@ int         check_args(int argc, char **argv);
 
 //check_map.c
 int         check_empty_lines(char *map);
-int         check_map_shape(char **grid);
-int         check_map_content(char *map);
+int         check_map_shape(t_game *game, char **map);
 int         check_walls(t_game *game, char **map);
+int         check_map_content(char *map);
 size_t      count_rows(char **grid);
 size_t	    count_collectables(t_game *game);
 
 //init_map.c
 int         init_map(t_game *game, int32_t map_file);
-t_game      *init_game_struct(char **grid);
+t_game      *init_game_struct(char **map);
 
 //validate_path.c
 size_t      player_position(t_game *game, char c);
@@ -111,6 +111,7 @@ void        free_game(t_game *game);
 void        free_map(char **map, size_t height);
 void        free_array(char ***array);
 void        print_error(char *message);
+void        map_error(t_game *game, char *message);
 
 //init_game.c
 int         init_mlx(t_game *game, int width, int height);

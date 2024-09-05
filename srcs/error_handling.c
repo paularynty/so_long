@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:30:57 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/04 18:20:04 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 08:32:59 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,11 @@ void    print_error(char *message)
 {
     ft_printf(PINK"Error\n"GREY"%s\n"RESET, message);
     exit(1);
+}
+
+void    map_error(t_game *game, char *message)
+{
+    if (game && game->map)
+        free_array(&game->map);
+    print_error(message);
 }

@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/04 18:52:34 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 09:10:01 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ size_t  count_rows(char **grid)
     // close(map_fd);
     // return (joined_line);
 
-t_game  *init_game_struct(char **grid)
+t_game  *init_game_struct(char **map)
 {
     t_game  *game;
 
@@ -56,11 +56,11 @@ t_game  *init_game_struct(char **grid)
     if (!game)
     {
         free_game(game);
-        print_error("Memory allocation failed");
+        map_error(NULL, "Memory allocation failed");
     }
-    // game->map = grid;
-    // game->map_width = ft_strlen(grid[0]);
-    // game->map_height = count_rows(grid);
+    game->map = map;
+    game->map_width = ft_strlen(map[0]);
+    game->map_height = count_rows(map);
     game->collectables = count_collectables(game);
     game->player_x = player_position(game, 'x');
     game->player_y = player_position(game, 'y');
@@ -78,24 +78,17 @@ static void    check_map(t_game *game)
     int32_t     col;
     t_position  player_start;
 
-	if (check_map_shape(game->map))
-    {
-        free_array(&game->map);
-        return ;
-    }
-	// game = init_game_struct(game->map);
-	if (check_walls(game, game->map))
-    {
-        free_array(&game->map);
-        return ;
-    }
+	check_map_shape(game, game->map);
+	check_walls(game, game->map);
+    game = init_game_struct(game->map);
     player_start = (t_position){game->player_x, game->player_y};
 	if (!validate_path(game, player_start))
-    {
-        print_error("No valid path available");
-        free_game(game);
-        return ;
-    }
+        map_error(game, "No valid path available");
+    // {
+    //     print_error("No valid path available");
+    //     free_game(game);
+    //     return ;
+    // }
 	// return (game);
 }
 
@@ -117,11 +110,8 @@ int init_map(t_game *game, int32_t map_fd)
         return (FAILURE);
     game->map = ft_split(map_as_str, '\n');
     if (!game->map)
-    {
-        free_array(&game->map);
-        print_error("Split failed");
-        // //check for NULL if split fails & free, as if you would with malloc
-    }
+        map_error(game, "Split failed");
+    // //check for NULL if split fails & free, as if you would with malloc
     game->map_width = ft_strlen(game->map[0]);
     game->map_height = count_rows(game->map);
     check_map(game);
