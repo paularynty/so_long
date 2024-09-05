@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:29:55 by prynty            #+#    #+#             */
-/*   Updated: 2024/08/28 20:05:16 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 10:38:01 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int init_mlx(t_game *game, int width, int height)
     mlx = mlx_init(width, height, "Baby Dragon's Lunchtime", true);
     if (!mlx)
     {
-        free_map(game->map, game->map_height);
+        free_map(game->map, game->map->map_height);
         print_error("Failed to initialize MLX");
         return (0);
     }
@@ -74,10 +74,10 @@ static int render_background(t_game *game)
     
     x = 0;
     y = 0;
-    while (y < game->map_height)
+    while (y < game->map->map_height)
     {
         x = 0;
-        while (x < game->map_width)
+        while (x < game->map->map_width)
         {
             if (mlx_image_to_window(game->mlx, game->images.floor, x * TILESIZE, y * TILESIZE) < 0)
                 {
@@ -96,8 +96,8 @@ int init_game(t_game *game)
     int     width;
     int     height;
 
-    width = game->map_width * TILESIZE;
-    height = game->map_height * TILESIZE;
+    width = game->map->map_width * TILESIZE;
+    height = game->map->map_height * TILESIZE;
     if (!init_mlx(game, width, height))
         return (FAILURE);
     mlx_set_setting(MLX_STRETCH_IMAGE, 1);

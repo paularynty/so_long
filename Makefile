@@ -6,7 +6,7 @@
 #    By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 12:05:04 by prynty            #+#    #+#              #
-#    Updated: 2024/08/28 18:03:43 by prynty           ###   ########.fr        #
+#    Updated: 2024/09/05 10:27:56 by prynty           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,14 +50,14 @@ LIBMLX		= $(MLXDIR)/build/libmlx42.a
 
 FILES 		= main.c \
 			check_args.c \
-			draw_images.c \
 			error_handling.c \
 			init_game.c \
 			init_map.c \
 			check_map.c \
-			game_text.c \
-			movement.c \
 			validate_path.c \
+			#draw_images.c \
+			game_text.c \
+			movement.c \#
 
 SRCS		= $(addprefix srcs/, $(FILES))
 OBJS		= $(addprefix objs/, $(FILES:.c=.o))

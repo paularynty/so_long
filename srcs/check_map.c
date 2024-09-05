@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:23:39 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 08:56:31 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 10:23:05 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,47 @@ int check_empty_lines(char *map)
     return (0);
 }
 
-int check_map_shape(t_game *game, char **map)
+int check_map_shape(t_map *map, char **grid)
 {
 	size_t	i;
 	size_t	len;
 
 	i = 0;
-	while (map[i])
+	while (grid[i])
 	{
-		if (ft_strlen(map[i]) != game->map_width)
-            map_error(game, "Map is not rectangular");
+		if (ft_strlen(grid[i]) != map->map_width)
+            map_error(map, "Map is not rectangular");
 		i++;
 	}
     return (0);
 }
 
-size_t	count_collectables(t_game *game)
+int check_walls(t_map *map, char **grid)
+{
+	size_t  i;
+	
+	i = 0;
+    while (i < map->map_width)
+    {
+        if (map->grid[0][i] != '1')
+            map_error(map, "The map is not surrounded by walls (top row)");
+        if (map->grid[map->map_height - 1][i] != '1')
+            map_error(map, "The map is not surrounded by walls (bottom row)");
+        i++;
+    }
+    i = 0;
+    while (i < map->map_height)
+    {
+        if (map->grid[i][0] != '1')
+            map_error(map, "The map is not surrounded by walls (left column)");
+        if (map->grid[i][map->map_width - 1] != '1')
+            map_error(map, "The map is not surrounded by walls (right column)");
+        i++;
+    }
+    return (0);
+}
+
+size_t	count_collectables(t_map *map, char **grid)
 {
 	size_t	y;
 	size_t	x;
@@ -57,12 +82,12 @@ size_t	count_collectables(t_game *game)
 
 	y = 0;
 	collectables = 0;
-	while (y < game->map_height)
+	while (y < map->map_height)
 	{
 		x = 0;
-		while (x < game->map_width)
+		while (x < map->map_width)
 		{
-			if (game->map[y][x] == 'C')
+			if (map->map[y][x] == 'C')
 			{
 				collectables++;
 			}
@@ -117,27 +142,3 @@ int    check_map_content(char *map)
     return (0);
 }
 
-int check_walls(t_game *game, char **map)
-{
-	size_t  i;
-	
-	i = 0;
-    while (i < game->map_width)
-    {
-        if (game->map[0][i] != '1')
-            map_error(game, "The map is not surrounded by walls (top row)");
-        if (game->map[game->map_height - 1][i] != '1')
-            map_error(game, "The map is not surrounded by walls (bottom row)");
-        i++;
-    }
-    i = 0;
-    while (i < game->map_height)
-    {
-        if (game->map[i][0] != '1')
-            map_error(game, "The map is not surrounded by walls (left column)");
-        if (game->map[i][game->map_width - 1] != '1')
-            map_error(game, "The map is not surrounded by walls (right column)");
-        i++;
-    }
-    return (0);
-}

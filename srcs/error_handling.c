@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:30:57 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 08:32:59 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 10:37:36 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void    clean_game(t_game *game)
         mlx_terminate(game->mlx);
         game->mlx = NULL;
     }
-    if (game->map)
+    if (game->map->grid)
         free_game(game);
 }
 
@@ -44,12 +44,12 @@ void free_game(t_game *game)
     i = 0;
     if (!game)
         return ;
-    if (game->map)
+    if (game->map->grid)
     {
-        while (game->map[i])
-            free(game->map[i++]);
-        free(game->map);
-        game->map = NULL;
+        while (game->map->grid[i])
+            free(game->map->grid[i++]);
+        free(game->map->grid);
+        game->map->grid = NULL;
     }
     free(game);
 }
@@ -88,9 +88,9 @@ void    print_error(char *message)
     exit(1);
 }
 
-void    map_error(t_game *game, char *message)
+void    map_error(t_map *map, char *message)
 {
-    if (game && game->map)
-        free_array(&game->map);
+    if (map && map->grid)
+        free_array(&map->grid);
     print_error(message);
 }

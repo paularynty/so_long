@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 09:28:35 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 10:38:38 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,29 @@ typedef struct  s_position
     int y;
 }   t_position;
 
-typedef struct	s_game
+typedef struct s_map
 {
     t_position  position;
-    t_images    images;
-    mlx_t       *mlx;
-    
-    char        **map;
+    char        **grid;
     int         map_width;
     int         map_height;
-    
     int         player_x;
     int         player_y;
+}   t_map;
+
+
+typedef struct	s_game
+{
+    t_images    images;
+    t_map       *map;
+    mlx_t       *mlx;
+    
+    // char        **map;
+    // int         map_width;
+    // int         map_height;
+    
+    // int         player_x;
+    // int         player_y;
 
     int         collectables;
     int         steps;
@@ -89,19 +100,19 @@ int         check_args(int argc, char **argv);
 
 //check_map.c
 int         check_empty_lines(char *map);
-int         check_map_shape(t_game *game, char **map);
-int         check_walls(t_game *game, char **map);
+int         check_map_shape(t_map *map, char **grid);
+int         check_walls(t_map *map, char **grid);
 int         check_map_content(char *map);
 // size_t      count_rows(char **grid);
-size_t	    count_collectables(t_game *game);
+size_t	    count_collectables(t_map *map, char **grid);
 
 //init_map.c
-int         init_map(t_game *game, int32_t map_file);
+int init_map(t_map *map, int32_t map_fd);
 // t_game      *init_game_struct(char **map);
 
 //validate_path.c
-size_t      player_position(t_game *game, char c);
-int         validate_path(t_game *game, t_position position);
+size_t      player_position(t_map *map, char c);
+int         validate_path(t_map *map, t_position position);
 
 //error_handling.c
 void        clean_game(t_game *game);
@@ -109,7 +120,7 @@ void        free_game(t_game *game);
 void        free_map(char **map, size_t height);
 void        free_array(char ***array);
 void        print_error(char *message);
-void        map_error(t_game *game, char *message);
+void        map_error(t_map *map, char *message);
 
 //init_game.c
 int         init_mlx(t_game *game, int width, int height);
@@ -118,15 +129,15 @@ mlx_image_t *load_image(mlx_t *mlx, const char *imgfile);
 int         draw_images(t_game *game, size_t y, size_t x);
 int         render_map(t_game *game);
 
-//game_text.c
-void        start_game(void);
-void        string_to_screen(t_game *game);
-void        print_moves(t_game *game);
-void        print_collectables(t_game *game);
-void        end_game(t_game *game, mlx_t *mlx);
+// //game_text.c
+// void        start_game(void);
+// void        string_to_screen(t_game *game);
+// void        print_moves(t_game *game);
+// void        print_collectables(t_game *game);
+// void        end_game(t_game *game, mlx_t *mlx);
 
-//movement.c
-void        key_hooks(mlx_key_data_t keydata, void *param);
+// //movement.c
+// void        key_hooks(mlx_key_data_t keydata, void *param);
 
 //enemy.c
 // void	    animate_enemy(t_game *game);

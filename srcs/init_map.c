@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 09:31:48 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 10:39:21 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void init_game_struct(t_game *game, char **map)
     // game->map = map;
     // game->map_width = ft_strlen(map[0]);
     // game->map_height = count_rows(map);
-    game->collectables = count_collectables(game);
+    game->collectables = count_collectables(game, game->map);
     // game->player_x = player_position(game, 'x');
     // game->player_y = player_position(game, 'y');
     game->steps = 0;
@@ -46,29 +46,29 @@ static void init_game_struct(t_game *game, char **map)
     // return (game);
 }
 
-static void    check_map(t_game *game)
+static void    check_map(t_map *map)
 {
     int32_t     rows;
     int32_t     col;
     t_position  player_start;
 
-	check_map_shape(game, game->map);
-	check_walls(game, game->map);
-    // init_game_struct(game, game->map);
-    game->player_x = player_position(game, 'x');
-    game->player_y = player_position(game, 'y');
-    player_start = (t_position){game->player_x, game->player_y};
-	if (!validate_path(game, player_start))
-        map_error(game, "No valid path available");
+	check_map_shape(map, map->grid);
+    init_game_struct(game, game->map);
+    check_walls(map, map->grid);
+    map->player_x = player_position(map, 'x');
+    map->player_y = player_position(map, 'y');
+    player_start = (t_position){map->player_x, map->player_y};
+	if (!validate_path(map, player_start))
+        map_error(map, "No valid path available");
     // {
-    //     print_error("No valid path available");
     //     free_game(game);
+    //     print_error("No valid path available");
     //     return ;
     // }
 	// return (game);
 }
 
-int init_map(t_game *game, int32_t map_fd)
+int init_map(t_map *map, int32_t map_fd)
 {
     char        map_as_str[MAX_BYTE];
     int32_t     bytes_read;
@@ -84,12 +84,12 @@ int init_map(t_game *game, int32_t map_fd)
         print_error("Map is too large");
     if (check_empty_lines(map_as_str) || check_map_content(map_as_str))
         return (FAILURE);
-    game->map = ft_split(map_as_str, '\n');
-    if (!game->map)
-        map_error(game, "Split failed");
+    map->grid = ft_split(map_as_str, '\n');
+    if (!map->grid)
+        map_error(map, "Split failed");
     // //check for NULL if split fails & free, as if you would with malloc
-    game->map_width = ft_strlen(game->map[0]);
-    game->map_height = count_rows(game->map);
-    check_map(game);
+    map->map_width = ft_strlen(map->grid[0]);
+    map->map_height = count_rows(map->grid);
+    check_map(map);
     return (SUCCESS);
 }

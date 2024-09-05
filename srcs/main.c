@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:09:11 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 09:24:39 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 10:36:00 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,20 @@ int32_t validate_file(char *file)
 int	main(int argc, char **argv)
 {
 	t_game	game;
+	t_map	map;
 	int32_t	map_file;
 
-	game = (t_game){0};
+	// game = (t_game){0};
 	if (check_args(argc, argv) == -1)
 		return (FAILURE);
 	map_file = validate_file(argv[1]);
 	if (map_file == -1)
 		return (FAILURE);
-	if (init_map(&game, map_file) == -1)
-		return (FAILURE);
+	ft_bzero(&map, sizeof(map));
+	init_map(&map, map_file);
+	ft_bzero(&game, sizeof(game));
+	game.map = &map;
+	init_game(&game);
 	// if (!game)
 	// 	return (FAILURE);
 	// // if (init_game(game) == -1)
