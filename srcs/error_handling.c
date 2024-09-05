@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:30:57 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 18:13:00 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 21:10:56 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,3 +68,4 @@ void    print_error(char *message)
 {
     ft_printf(PINK"Error\n"GREY"%s\n"RESET, message);
 }
+

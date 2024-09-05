@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:00:50 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 18:11:13 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 21:03:50 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void    string_to_screen(t_game *game)
     char    *str;
 
     game->images.moves = mlx_put_string(game->mlx, "Steps:", 24,
-        game->map_height * TILESIZE - 26);
-    mlx_put_string(game->mlx, "Fruits:", 136, game->map_height * TILESIZE - 26);
-    mlx_put_string(game->mlx, "/", 216, game->map_height * TILESIZE - 26);
+        game->map_height * PIXELS - 26);
+    mlx_put_string(game->mlx, "Fruits:", 150, game->map_height * PIXELS - 26);
+    mlx_put_string(game->mlx, "/", 260, game->map_height * PIXELS - 26);
     str = ft_itoa(game->collectables);
-    mlx_put_string(game->mlx, str, 232, game->map_height * TILESIZE - 26);
+    mlx_put_string(game->mlx, str, 278, game->map_height * PIXELS - 26);
     free(str);
 }
 
@@ -31,8 +31,8 @@ void    print_moves(t_game *game)
 
     str = ft_itoa(game->steps);
     mlx_delete_image(game->mlx, game->images.move_counter);
-    game->images.move_counter = mlx_put_string(game->mlx, str, 100, game->map_height
-        * TILESIZE - 26);
+    game->images.move_counter = mlx_put_string(game->mlx, str, 96, game->map_height
+        * PIXELS - 26);
     free(str);
 }
 
@@ -42,14 +42,22 @@ void    print_collectables(t_game *game)
 
     str = ft_itoa(game->score);
     mlx_delete_image(game->mlx, game->images.collectable_screen);
-    game->images.collectable_screen = mlx_put_string(game->mlx, str, 190,
-        game->map_height * TILESIZE - 26);
+    game->images.collectable_screen = mlx_put_string(game->mlx, str, 232,
+        game->map_height * PIXELS - 26);
     free(str);
 }
 
 void    start_game(void)
 {
-    ft_printf(GREEN"\n✨🥝🥭🍓🐉 ~~ Welcome to Baby Dragon's Lunchtime! ~~ 🐉🍓🥭🥝✨\n\n"RESET);
+    ft_printf("\n✨🥝🥭🍓🐉🍓🥭✨🍓🥝🥭🐉🍓🥭✨🥝🥭🍓🐉🍓🥭✨\n");
+    ft_printf("🍓                                        🐉\n");
+    ft_printf(GREEN"🥭    Welcome to Lunchtime with Dragon!   🥝\n"RESET);
+    ft_printf("🐉                                        ✨\n");
+    ft_printf("🥝            Play as a dragon            🍓\n"RESET);
+    ft_printf("✨           and collect fruits.          🥭\n"RESET);
+    ft_printf("🥭           Easy enough, innit?          🥝\n"RESET);
+    ft_printf("🍓                                        🐉\n");
+    ft_printf("✨🥝🥭🍓🐉🍓🥭🥝✨🥝🥭🍓🐉🍓🥭🥝✨🍓🐉🍓🥭✨\n\n");
 }
 
 void    end_game(t_game *game, mlx_t *mlx)
