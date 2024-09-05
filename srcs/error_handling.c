@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:30:57 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 11:12:10 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 17:45:51 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,19 @@ void    clean_game(t_game *game)
 void free_game(t_game *game)
 {
     size_t  i;
+    t_map   *map;
 
     i = 0;
     if (!game)
         return ;
     if (game->map->grid)
-    {
-        while (game->map->grid[i])
-            free(game->map->grid[i++]);
-        free(game->map->grid);
-        game->map->grid = NULL;
-    }
+        free_array(&map->grid);
+    // {
+    //     while (game->map->grid[i])
+    //         free(game->map->grid[i++]);
+    //     free(game->map->grid);
+    //     game->map->grid = NULL;
+    // }
     free(game);
 }
 

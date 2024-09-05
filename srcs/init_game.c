@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:29:55 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 11:12:55 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 17:43:19 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,36 +91,46 @@ static int render_background(t_game *game)
     return (1);
 }
 
-static void init_game_struct(t_game *game)
-{
-    // t_game  *game;
+// static void init_game_struct(t_game *game)
+// {
+//     // t_game  *game;
 
-    game = (t_game *)malloc(sizeof(t_game));
-    if (!game)
-    {
-        free_game(game);
-        map_error(NULL, "Memory allocation failed");
-    }
-    // game->map = map;
-    // game->map_width = ft_strlen(map[0]);
-    // game->map_height = count_rows(map);
-    // game->collectables = count_collectables(game, game->map);
-    // game->player_x = player_position(game, 'x');
-    // game->player_y = player_position(game, 'y');
-    game->steps = 0;
-    game->won = 0;
-    game->score = 0;
-    game->images->collectable_screen = 0;
-    game->images->move_counter = 0;
-    // return (game);
-}
+//     game = (t_game *)malloc(sizeof(t_game));
+//     if (!game)
+//     {
+//         free_game(game);
+//         map_error(NULL, "Memory allocation failed");
+//     }
+//     // game->map = map;
+//     // game->map_width = ft_strlen(map[0]);
+//     // game->map_height = count_rows(map);
+//     // game->collectables = count_collectables(game, game->map);
+//     // game->player_x = player_position(game, 'x');
+//     // game->player_y = player_position(game, 'y');
+//     // game->steps = 0;
+//     // game->won = 0;
+//     // game->score = 0;
+//     // game->images->collectable_screen = 0;
+//     // game->images->move_counter = 0;
+//     // return (game);
+// }
 
 int init_game(t_game *game)
 {
     int     width;
     int     height;
 
-    init_game_struct(game);
+    // game = (t_game *)malloc(sizeof(t_game));
+    // if (!game)
+    // {
+    //     free_game(game);
+    //     map_error(NULL, "Memory allocation failed");
+    // }
+    game->steps = 0;
+    game->won = 0;
+    game->score = 0;
+    // game->images->collectable_screen = 0;
+    // game->images->move_counter = 0;
     width = game->map->map_width * TILESIZE;
     height = game->map->map_height * TILESIZE;
     if (!init_mlx(game, width, height))

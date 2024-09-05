@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 10:49:27 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/05 17:42:49 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int init_map(t_map *map, int32_t map_fd)
     char        map_as_str[MAX_BYTE];
     int32_t     bytes_read;
     
+    map = (t_map *)malloc(sizeof(t_map));
     ft_bzero(map_as_str, MAX_BYTE);
     bytes_read = read(map_fd, map_as_str, MAX_BYTE);
     close(map_fd);
