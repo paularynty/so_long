@@ -1,6 +1,7 @@
 *.o
 *.swp
 *.vscode
+.DS_Store
 *.out
 *.dSYM
 libft.a

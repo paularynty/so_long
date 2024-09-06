@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/06 18:01:31 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/06 18:04:41 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,6 @@ void	key_hooks(mlx_key_data_t data, void *param);
 
 //game_control.c
 void	start_game(void);
-void	string_to_screen(t_game *game);
-void	print_moves(t_game *game);
-void	print_collectables(t_game *game);
 void	end_game(t_game *game, mlx_t *mlx);
 
 #endif
