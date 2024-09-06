@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_init.c                                         :+:      :+:    :+:   */
+/*   map_init_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:31:02 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/06 16:09:17 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/06 16:55:04 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../../includes/so_long_bonus.h"
 
 size_t	count_rows(char **map)
 {
@@ -22,7 +22,7 @@ size_t	count_rows(char **map)
 	return (y);
 }
 
-static char	*read_map(char *map, int32_t map_file)
+static char	*read_map(char *map, int map_file)
 {
 	char	*line;
 	char	*temp;

@@ -1,16 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_text.c                                        :+:      :+:    :+:   */
+/*   game_text_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:00:50 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/06 16:09:00 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/06 16:54:54 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../../includes/so_long_bonus.h"
+
+void	string_to_screen(t_game *game)
+{
+	char	*str;
+
+	str = ft_itoa(game->collectables);
+	game->images.moves = mlx_put_string(game->mlx, "Steps:", 24,
+			game->map_height * PIXELS - 26);
+	mlx_put_string(game->mlx, "Fruits:", 150,
+		game->map_height * PIXELS - 26);
+	mlx_put_string(game->mlx, "/", 260, game->map_height * PIXELS - 26);
+	mlx_put_string(game->mlx, str, 278, game->map_height * PIXELS - 26);
+	free(str);
+}
+
+void	print_moves(t_game *game)
+{
+	char	*str;
+
+	str = ft_itoa(game->steps);
+	mlx_delete_image(game->mlx, game->images.move_counter);
+	game->images.move_counter = mlx_put_string(game->mlx, str, 96,
+			game->map_height * PIXELS - 26);
+	free(str);
+}
+
+void	print_collectables(t_game *game)
+{
+	char	*str;
+
+	str = ft_itoa(game->score);
+	mlx_delete_image(game->mlx, game->images.collectable_screen);
+	game->images.collectable_screen = mlx_put_string(game->mlx, str, 232,
+			game->map_height * PIXELS - 26);
+	free(str);
+}
 
 void	start_game(void)
 {

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_movement.c                                    :+:      :+:    :+:   */
+/*   game_movement_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 12:34:09 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/06 16:09:06 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/06 16:54:50 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../../includes/so_long_bonus.h"
 
 static void	update_movement(t_game *game, int x, int y)
 {
@@ -68,12 +68,14 @@ static void	move_player(t_game *game, int x, int y)
 		collect_item(game, x, y);
 		game->score++;
 		ft_printf("🍓 Collected a fruit!\n");
+		print_collectables(game);
 	}
 	if (validate_exit(game, x, y) == -1)
 		return ;
 	game->player_x = x;
 	game->player_y = y;
 	game->steps++;
+	print_moves(game);
 	ft_printf("🥝 Steps: %d\n", game->steps);
 }
 

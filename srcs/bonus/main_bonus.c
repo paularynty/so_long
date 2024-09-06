@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:09:11 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/06 16:09:43 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/06 16:57:27 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../../includes/so_long_bonus.h"
 
 static int	validate_file(char *file)
 {
@@ -31,7 +31,7 @@ static int	validate_file(char *file)
 	map_path_len = ft_strlen(file);
 	if (map_path_len < 4 || ft_strncmp(&file[map_path_len - 4], ".ber", 4))
 	{
-		print_error("Invalid map path, use format ./so_long [map].ber");
+		print_error("Invalid map path, use format ./so_long_bonus [map].ber");
 		return (-1);
 	}
 	return (map_file);
@@ -44,7 +44,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		print_error("Usage: ./so_long [map].ber");
+		print_error("Usage: ./so_long_bonus [map].ber");
 		return (-1);
 	}
 	game = (t_game *){0};
@@ -58,6 +58,7 @@ int	main(int argc, char **argv)
 		return (-1);
 	}
 	start_game();
+	string_to_screen(game);
 	mlx_key_hook(game->mlx, &key_hooks, game);
 	mlx_loop(game->mlx);
 	end_game(game, game->mlx);

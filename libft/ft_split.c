@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:14:53 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/06 12:18:25 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/06 17:56:41 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	**free_array(char **str)
 	return (NULL);
 }
 
-static int	get_rows(char const *str, char chr)
+static int	count_rows(char const *str, char chr)
 {
 	int	rows;
 	int	i;
@@ -51,7 +51,7 @@ char	**ft_split(char const *str, char chr)
 	char	*wordstart;
 	int		i;
 
-	array = (char **)malloc(sizeof(char *) * (get_rows(str, chr) + 1));
+	array = (char **)malloc(sizeof(char *) * (count_rows(str, chr) + 1));
 	if (!array)
 		return (NULL);
 	i = 0;

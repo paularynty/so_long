@@ -4,6 +4,5 @@
 *.out
 *.dSYM
 libft.a
-so_long
 MLX42/
 objs/
