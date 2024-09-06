@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:00:50 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 21:03:50 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/06 10:57:25 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,9 @@ void    end_game(t_game *game, mlx_t *mlx)
         ft_printf("\nSuccessfully collected all fruits!\n");
         ft_printf("You completed the game in");
         ft_printf(GREEN" %d "RESET, game->steps);
-        ft_printf("moves. Can you do better? 🍓\n");
+        ft_printf("moves. Can you do better? 🍓\n\n");
     }
     if (game->won == 0)
-    {
-        ft_printf("\nThe game ended. Why not try again?\n");
-    }
+        ft_printf("\nThe game ended. Why not try again?\n\n");
     clean_game(game);
 }

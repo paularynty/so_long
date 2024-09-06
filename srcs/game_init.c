@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:29:55 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 19:34:16 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/06 11:31:22 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int init_mlx(t_game *game, int width, int height)
     {
         free_map(game->map, game->map_height);
         print_error("Failed to initialize MLX");
-        return (0);
+        return (-1);
     }
     game->mlx = mlx;
     return (1);
@@ -60,8 +60,8 @@ int init_game_images(t_game *game)
     if (!game->images.enemy || !game->images.player 
         || !game->images.collectable || !game->images.wall 
         || !game->images.floor || !game->images.exit)
-        return (FAILURE);
-    return (SUCCESS);
+        return (-1);
+    return (0);
 }
 
 static int render_background(t_game *game)
@@ -79,13 +79,13 @@ static int render_background(t_game *game)
             if (mlx_image_to_window(game->mlx, game->images.floor, x * PIXELS, y * PIXELS) < 0)
                 {
                     print_error("Failed to put floor image to window");
-                    return (FAILURE);
+                    return (1);
                 }
                 x++;
         }
         y++;
     }
-    return (1);
+    return (0);
 }
 
 int init_game(t_game *game)
@@ -95,16 +95,23 @@ int init_game(t_game *game)
 
     width = game->map_width * PIXELS;
     height = game->map_height * PIXELS;
-    if (!init_mlx(game, width, height))
-        return (FAILURE);
+    if (width > SCREEN_WIDTH || height > SCREEN_HEIGHT)
+    {
+        free_game(game);
+        print_error("Map is too large, try with smaller map");
+        return (-1);
+    }
+    if (init_mlx(game, width, height) == -1)
+        return (-1);
     mlx_set_setting(MLX_STRETCH_IMAGE, 1);
     if (init_game_images(game) == -1)
     {
+        print_error("Failed to initialize images");
         mlx_terminate(game->mlx);
-        return (FAILURE);
+        return (-1);
     }
     render_background(game);
     render_map(game);
-    return (SUCCESS);
+    return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 12:34:09 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 19:33:39 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/06 11:32:03 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int  validate_exit(t_game *game, int x, int y)
         if (game->score != game->collectables)
         {
             ft_printf("Collect all fruits before dropping them into the basket 🧺\n");
-            return (FAILURE);
+            return (-1);
         }
         else
         {
@@ -52,7 +52,7 @@ static int  validate_exit(t_game *game, int x, int y)
             mlx_close_window(game->mlx);
         }
     }
-    return (SUCCESS);
+    return (0);
 }
 
 static void move_player(t_game *game, int x, int y)

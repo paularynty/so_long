@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:11:22 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 21:23:53 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/06 11:36:56 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@
 # define SCREEN_WIDTH 3840
 # define SCREEN_HEIGHT 2160
 # define PIXELS 32
-
-# define SUCCESS 0
-# define FAILURE -1
 
 # define IMG_ENEMY "textures/enemy.png"
 # define IMG_EXIT "textures/basket.png"
@@ -83,24 +80,22 @@ void        free_game(t_game *game);
 void        free_map(char **map, size_t height);
 void        print_error(char *message);
 
+//map_content.c
+int         check_map_objects(t_game *game, char *map);
+
 //map_validation.c
 int         check_empty_lines(char *map);
-// int         check_map_shape(char **grid);
 int         check_map_shape(char *map, char **grid);
-int         check_map_content(char *map);
 int         check_walls_horizontal(t_game *game, char *map);
 int         check_walls_vertical(t_game *game, char *map);
-size_t	    count_collectables(t_game *game);
 
 //map_init.c
 size_t      count_rows(char **map);
-t_game      *init_game_struct(char **grid);
 t_game      *init_map(char *map, int32_t map_file);
 
 //map_path.c
 size_t      player_position(t_game *game, char c);
 int	        validate_path(t_game *game, char **grid, char *map);
-// int         validate_path(t_game *game, t_position position);
 
 //game_init.c
 int         init_mlx(t_game *game, int width, int height);
