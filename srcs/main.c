@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:09:11 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 20:38:08 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/06 11:36:12 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static int	check_args(int argc, char **argv)
     if (argc < 2)
     {
         print_error("Missing map file, use format: ./so_long [map].ber");
-        return (FAILURE);
+        return (-1);
     }
     else if (argc > 2)
     {
         print_error("Too many arguments, use format: ./so_long [map].ber");
-        return (FAILURE);
+        return (-1);
     }
     else
     {
@@ -32,10 +32,10 @@ static int	check_args(int argc, char **argv)
         if (map_path_len < 4 || ft_strncmp(&argv[1][map_path_len - 4], ".ber", 4))
         {
             print_error("Invalid map path, use format: ./so_long [map].ber");
-            return (FAILURE);
+            return (-1);
         }
     }
-    return (SUCCESS);
+    return (0);
 }
 
 int32_t validate_file(char *file)
@@ -51,14 +51,14 @@ int32_t validate_file(char *file)
 	map_file = open(file, O_RDONLY);
 	if (map_file < 0)
 	{
-		print_error("Failed to open map");
+		print_error("Failed to open map, verify that map file exists");
 		exit(1);
 	}
 	map_path_len = ft_strlen(file);
     if (map_path_len < 4 || ft_strncmp(&file[map_path_len - 4], ".ber", 4))
 	{
 		print_error("Invalid map path, use format: ./so_long [map].ber");
-        return (FAILURE);
+        return (-1);
     }
 	return (map_file);
 }
@@ -70,13 +70,16 @@ int	main(int argc, char **argv)
 
 	game = (t_game *){0};
 	if (check_args(argc, argv) == -1)
-		return (FAILURE);
+		return (-1);
 	map_file = validate_file(argv[1]);
 	game = init_map(argv[1], map_file);
 	if (!game)
-		return (FAILURE);
+		return (-1);
 	if (init_game(game) == -1)
-		return (FAILURE);
+	{
+		free(game);
+		return (-1);
+	}
 	start_game();
 	string_to_screen(game);
 	mlx_key_hook(game->mlx, &key_hooks, game);

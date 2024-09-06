@@ -6,7 +6,7 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 11:13:19 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/05 19:32:46 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/06 11:35:40 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int draw_collectables(t_game *game, size_t y, size_t x)
     if (mlx_image_to_window < 0)
     {
         print_error("Failed to put collectable image to window");
-        return (FAILURE);
+        return (-1);
     }
     return (1);
 }
@@ -29,7 +29,7 @@ static int draw_walls(t_game *game, size_t y, size_t x)
     if (mlx_image_to_window < 0)
     {
         print_error("Failed to put wall image to window");
-        return (FAILURE);
+        return (-1);
     }
     return (1);
 }
@@ -40,7 +40,7 @@ static int draw_player(t_game *game, size_t y, size_t x)
     if (mlx_image_to_window < 0)
     {
         print_error("Failed to put player image to window");
-        return (FAILURE);
+        return (-1);
     }
     return (1);
 }
@@ -51,7 +51,7 @@ static int draw_exit(t_game *game, size_t y, size_t x)
     if (mlx_image_to_window < 0)
     {
         print_error("Failed to put exit image to window");
-        return (FAILURE);
+        return (-1);
     }
     return (1);
 }
