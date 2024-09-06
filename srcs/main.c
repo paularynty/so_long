@@ -6,43 +6,17 @@
 /*   By: prynty <prynty@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:09:11 by prynty            #+#    #+#             */
-/*   Updated: 2024/09/06 11:36:12 by prynty           ###   ########.fr       */
+/*   Updated: 2024/09/06 13:36:45 by prynty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-static int	check_args(int argc, char **argv)
-{
-    size_t     map_path_len;
-    
-    if (argc < 2)
-    {
-        print_error("Missing map file, use format: ./so_long [map].ber");
-        return (-1);
-    }
-    else if (argc > 2)
-    {
-        print_error("Too many arguments, use format: ./so_long [map].ber");
-        return (-1);
-    }
-    else
-    {
-        map_path_len = ft_strlen(argv[1]);
-        if (map_path_len < 4 || ft_strncmp(&argv[1][map_path_len - 4], ".ber", 4))
-        {
-            print_error("Invalid map path, use format: ./so_long [map].ber");
-            return (-1);
-        }
-    }
-    return (0);
-}
-
-int32_t validate_file(char *file)
+static int32_t	validate_file(char *file)
 {
 	int32_t	map_path_len;
 	int32_t	map_file;
-	
+
 	if (!file[0])
 	{
 		print_error("Empty path");
@@ -55,11 +29,11 @@ int32_t validate_file(char *file)
 		exit(1);
 	}
 	map_path_len = ft_strlen(file);
-    if (map_path_len < 4 || ft_strncmp(&file[map_path_len - 4], ".ber", 4))
+	if (map_path_len < 4 || ft_strncmp(&file[map_path_len - 4], ".ber", 4))
 	{
-		print_error("Invalid map path, use format: ./so_long [map].ber");
-        return (-1);
-    }
+		print_error("Invalid map path, use format ./so_long [map].ber");
+		return (-1);
+	}
 	return (map_file);
 }
 
@@ -68,16 +42,19 @@ int	main(int argc, char **argv)
 	t_game	*game;
 	int32_t	map_file;
 
-	game = (t_game *){0};
-	if (check_args(argc, argv) == -1)
+	if (argc != 2)
+	{
+		print_error("Usage: ./so_long [map].ber");
 		return (-1);
+	}
+	game = (t_game *){0};
 	map_file = validate_file(argv[1]);
 	game = init_map(argv[1], map_file);
 	if (!game)
 		return (-1);
 	if (init_game(game) == -1)
 	{
-		free(game);
+		free_game(game);
 		return (-1);
 	}
 	start_game();

@@ -1,12 +1,9 @@
 *.o
 *.swp
 *.vscode
-objs/
 *.out
-libft.a
-pseudo.txt
-so_long
-*.ber
 *.dSYM
-enemy.c
+libft.a
+so_long
 MLX42/
+objs/
